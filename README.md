@@ -50,7 +50,7 @@
 #### 开箱即用版
 
   Window独立打包版，无需安装环境，直接运行`启动.bat`即可。请前往release下载。仅支持windows
-  独立版截图：![window独立绿色版](/images/windows_run.png =60x)
+  独立版截图：![window独立绿色版](/images/windows_run.png)
 
 
 
