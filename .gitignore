@@ -1,0 +1,21 @@
+# Python
+*.pyc
+*.pyo
+*.spec
+*.c
+*.pyd
+*.so
+test.py
+__pycache__
+
+# Documents
+test
+
+
+# Files
+*.bat
+server.ico
+
+# Build
+build
+dist

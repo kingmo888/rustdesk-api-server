@@ -1,0 +1,158 @@
+{% load static %}<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>RustDesk WebUI</title>
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+
+</head>
+<body>
+<script src={% static "layui/layui.js" %}></script>
+<script>
+layui.use('element', function(){
+  var element = layui.element; //导航的hover效果、二级菜单等功能，需要依赖element模块
+  
+  //监听导航点击
+  element.on('nav(demo)', function(elem){
+    //console.log(elem)
+    layer.msg(elem.text());
+  });
+});
+</script>
+
+<ul class="layui-nav">
+  <li class="layui-nav-item"><a href="/">首页</a></li>
+
+
+
+
+
+  {% if u.is_admin %}
+  <li class="layui-nav-item"><a href="/admin">管理后台</a>
+  </li>
+  {% endif %}
+  
+</ul>
+
+<fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">
+  <legend>综合屏</legend>
+</fieldset>   
+ 
+<div style="padding: 20px; background-color: #F2F2F2;">
+  <div class="layui-row layui-col-space15">
+ <div class="layui-col-md15">
+      <div class="layui-card">
+        <div class="layui-card-header">设备统计 - 【用户名:{{u.username}}】</div>
+        <div class="layui-card-body">
+  <table class="layui-table">
+    <colgroup>
+      <col width="30">
+      <col width="30">
+      <col width="100">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>客户端ID</th>
+        <th>版本</th>
+        <th>连接密码</th>
+        <th>系统用户名</th>
+        <th>计算机名</th>
+        <th>别名</th>
+        <th>平台</th>
+        <th>系统</th>
+        <th>CPU</th>
+        <th>内存</th>
+        <th>注册时间</th>
+        <th>更新时间</th>
+
+      </tr> 
+    </thead>
+    <tbody>
+	
+	{% for one in single_info %}
+      <tr>
+        <td>{{one.rid}} </td>
+        <td>{{one.version}}		</td>
+        <td>{{one.has_rhash}}		</td>
+        <td>{{one.username}}		</td>
+        <td>{{one.hostname}}		</td>
+        <td>{{one.alias}}		</td>
+        <td>{{one.platform}}		</td>
+        <td>{{one.os}}		</td>
+        <td>{{one.cpu}}		</td>
+        <td>{{one.memory}}		</td>
+        <td>{{one.create_time}}		</td>
+        <td>{{one.update_time}}		</td>
+
+		
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+        </div>
+      </div>
+    </div>
+    
+    
+{% if u.is_admin %}
+<div class="layui-col-md15">
+      <div class="layui-card">
+        <div class="layui-card-header">全部用户</div>
+        <div class="layui-card-body">
+  <table class="layui-table">
+    <colgroup>
+      <col width="30">
+      <col width="30">
+      <col width="100">
+      <col>
+    </colgroup>
+    <thead>
+      <tr>
+        <th>客户端ID</th>
+        <th>所属用户</th>
+        <th>版本</th>
+        <th>系统用户名</th>
+        <th>计算机名</th>
+        <th>系统</th>
+        <th>CPU</th>
+        <th>内存</th>
+        <th>注册时间</th>
+        <th>更新时间</th>
+
+      </tr> 
+    </thead>
+    <tbody>
+	
+	{% for one in all_info %}
+      <tr>
+        <td>{{one.rid}} </td>
+        <td>{{one.rust_user}}		</td>
+        <td>{{one.version}}		</td>
+        <td>{{one.username}}		</td>
+        <td>{{one.hostname}}		</td>
+        <td>{{one.os}}		</td>
+        <td>{{one.cpu}}		</td>
+        <td>{{one.memory}}		</td>
+        <td>{{one.create_time}}		</td>
+        <td>{{one.update_time}}		</td>
+
+		
+
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+        </div>
+      </div>
+    </div>
+{% endif %}
+
+</div></div>
+
+</body>
+</html>

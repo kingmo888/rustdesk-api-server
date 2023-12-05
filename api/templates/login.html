@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+ 
+    <title>登录_【RustDeskWeb】</title>
+        <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
+        <link rel="stylesheet" href="{% static 'layui/css/style.css' %}">
+
+ 
+</head>
+<body>
+ 
+<div class="login-main">
+    <header class="layui-elip">登录</header>
+    <form class="layui-form">
+        <div class="layui-input-inline">
+            <input type="text" name="account" required lay-verify="required" placeholder="用户名" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-input-inline">
+            <input type="password" name="password" required lay-verify="required" placeholder="密码" autocomplete="off"
+                   class="layui-input">
+        </div>
+        <div class="layui-input-inline login-btn">
+            <button lay-submit lay-filter="login" class="layui-btn">登录</button>
+        </div>
+        <hr/>
+        <p><a href="/api/user_action?action=register" class="fl">立即注册</a><a href="javascript:;" class="fr">忘记密码？</a></p>
+    </form>
+</div>
+ 
+ 
+<script src={% static "layui/layui.js" %}></script>
+<script type="text/javascript">
+    layui.use(['form','layer','jquery'], function () {
+ 
+        // 操作对象
+        var form = layui.form;
+        var $ = layui.jquery;
+        form.on('submit(login)',function (data) {
+            console.log(data.field);
+            $.ajax({
+                url:'/api/user_action?action=login',
+                data:data.field,
+                dataType:'json',
+                type:'post',
+
+                success: function(resp) {
+		    			if(resp.code==1) {
+		    				//layer.alert(resp.msg,{icon:1});
+                            location.href = resp.url;
+		    			} else {
+		    				layer.alert(resp.msg,{icon:5});
+		    			}
+                }
+            })
+            return false;
+        })
+        $('.fr').on('click', function(){
+            layer.alert("这么简易的东西，忘记密码这功能就没必要了吧。",{icon:5});
+        })
+
+ 
+    });
+</script>
+</body>
+</html>
