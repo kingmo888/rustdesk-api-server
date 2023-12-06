@@ -1,0 +1,15 @@
+version: "3.8"
+services:
+  rustdesk-api-server:
+    container_name: rustdesk-api-server
+    build:
+      context: .
+    environment:
+      - HOST=0.0.0.0
+      - TZ=Asia/Shanghai
+    volumes:
+      - ./db.sqilte3:/rustdesk-api-server/db.sqlite3
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - "21114:21114"
