@@ -186,8 +186,9 @@ def get_all_info():
 
     for peer in peers:
         user = UserProfile.objects.filter(Q(id=peer.uid)).first()
-        devices[peer.rid]['rust_user'] = user.username
-
+        device = devices.get(peer.rid, None)
+        if device:
+            devices['rust_user'] = user.username
 
     return [v for k,v in devices.items()]
 
