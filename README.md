@@ -77,6 +77,7 @@ from pysqlite3 import dbapi2 as Database # 启用pysqlite3
 
 #### Docker方式
 
+`docker compose --compatibility up --build -d;`
 
 
 ### 计划开发
