@@ -1,11 +1,12 @@
-FROM python:3.11.7-slim-bullseye
-
-RUN pip install pip -U
-RUN pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
-RUN pip config set install.trusted-host mirrors.cloud.tencent.com
+FROM python:3.10.3-slim-bullseye 
 
 WORKDIR /rustdesk-api-server
 ADD . /rustdesk-api-server
+
+RUN pip install pip -U -i https://mirrors.cloud.tencent.com/pypi/simple
+RUN pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
+RUN pip config set install.trusted-host mirrors.cloud.tencent.com
+RUN pip install -r requirements.txt
 
 VOLUME /rustdesk-api-server/db.sqlite3
 
@@ -16,4 +17,6 @@ ENV TZ=Asia/Shanghai \
 EXPOSE 21114/tcp
 EXPOSE 21114/udp
 
-ENTRYPOINT ["python", "manage.py", "runserver $HOST:21114"]
+RUN cd /rustdesk-api-server
+
+ENTRYPOINT ["bash", "run.sh"]
