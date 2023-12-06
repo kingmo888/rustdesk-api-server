@@ -177,25 +177,19 @@ def get_single_info(uid):
     
     return [v for k,v in peers.items()]
 
-
 def get_all_info():
     devices = RustDesDevice.objects.all()
     peers = RustDeskPeer.objects.all()
-
     devices = {x.rid:model_to_dict2(x) for x in devices}
-
     for peer in peers:
         user = UserProfile.objects.filter(Q(id=peer.uid)).first()
         device = devices.get(peer.rid, None)
         if device:
             devices['rust_user'] = user.username
-
     return [v for k,v in devices.items()]
-
 
 @login_required(login_url='/api/user_action?action=login')
 def work(request):
-    #return JsonResponse({'code':0, 'msg':'登录成功'})
 
     username = request.user
     u = UserProfile.objects.get(username=username)
