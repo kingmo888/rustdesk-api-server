@@ -4,6 +4,7 @@
     <img src ="https://img.shields.io/badge/platform-windows|linux-green.svg"/>
     <img src ="https://img.shields.io/badge/python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
+    <img src ="https://img.shields.io/badge/docker-blue.svg" />
 </p>
 
 ### 缘起
