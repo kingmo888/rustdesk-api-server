@@ -54,7 +54,7 @@ def login(request):
     # 检查是否过期
     if token:
         now_t = datetime.datetime.now()
-        nums = (now_t - token.create_time).seconds
+        nums = (now_t - token.create_time).seconds if now_t > token.create_time else 0
         if nums >= EFFECTIVE_SECONDS:
             token.delete()
             token = None
