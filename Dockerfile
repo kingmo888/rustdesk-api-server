@@ -13,11 +13,15 @@ VOLUME /rustdesk-api-server/db.sqlite3
 ENV HOST 0.0.0.0
 ENV TZ=Asia/Shanghai \
     DEBIAN_FRONTEND=noninteractive
+
 ENV CSRF_TRUSTED_ORIGINS=""
+
 
 EXPOSE 21114/tcp
 EXPOSE 21114/udp
 
 RUN cd /rustdesk-api-server
 
+
 ENTRYPOINT ["bash", "run.sh"]
+

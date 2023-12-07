@@ -75,6 +75,12 @@
 from pysqlite3 import dbapi2 as Database # 启用pysqlite3
 ```
 
+#### Docker方式
+
+根目录执行命令：
+`docker compose --compatibility up --build -d;`
+
+感谢热心网友 @ferocknew 提供。
 
 ### 计划开发
 
@@ -82,3 +88,7 @@ from pysqlite3 import dbapi2 as Database # 启用pysqlite3
 
     说明：类似网盘url分享，url激活后可以获得某个或某组或某个标签下的设备
     备注：其实web api作为中间件，可做的不多，更多功能还是需要修改客户端来实现，就不太值当了。
+
+2、集成Web桌面形式
+
+    将大神的web桌面集成进来（待议）
