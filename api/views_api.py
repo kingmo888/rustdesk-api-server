@@ -35,7 +35,7 @@ def login(request):
     password = data.get('password', '')
     rid = data.get('id', '')
     uuid = data.get('uuid', '')
-    autoLogin = data.get('autoLogin', '')
+    autoLogin = data.get('autoLogin', True)
     rtype = data.get('type', '')
     deviceInfo = data.get('deviceInfo', '')
     user = auth.authenticate(username=username,password=password)
