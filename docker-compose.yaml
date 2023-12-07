@@ -7,6 +7,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - TZ=Asia/Shanghai
+      - CSRF_TRUSTED_ORIGINS=<//域名:端口>
     volumes:
       - ./db.sqlite3:/rustdesk-api-server/db.sqlite3
       - /etc/timezone:/etc/timezone:ro
