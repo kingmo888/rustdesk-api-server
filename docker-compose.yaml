@@ -7,12 +7,10 @@ services:
     environment:
       - HOST=0.0.0.0
       - TZ=Asia/Shanghai
-      - CSRF_TRUSTED_ORIGINS=http://www.baidu.com
+      - CSRF_TRUSTED_ORIGINS=<//域名:端口>
     volumes:
-      - ./db:/rustdesk-api-server/db
+      - ./db.sqlite3:/rustdesk-api-server/db.sqlite3
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
-    network_mode: bridge
     ports:
       - "21114:21114"
-    restart: unless-stopped

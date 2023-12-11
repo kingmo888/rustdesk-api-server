@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'rustdesk_server_api.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db/db.sqlite3',
+        'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
 
@@ -123,8 +123,8 @@ STATIC_URL = 'static/'
 
 if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-
+    
 else:
 
-
+    
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')     # 新增
