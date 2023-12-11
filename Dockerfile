@@ -1,18 +1,27 @@
-FROM python:3.10.3-alpine
+FROM python:3.10.3-slim-bullseye 
 
 WORKDIR /rustdesk-api-server
 ADD . /rustdesk-api-server
 
-RUN set -ex \
-    && pip install --no-cache-dir --disable-pip-version-check -r requirements.txt \
-    && rm -rf /var/cache/apk/* \
-    && cp -r ./db ./db_bak
+RUN pip install pip -U -i https://mirrors.cloud.tencent.com/pypi/simple
+RUN pip config set global.index-url https://mirrors.cloud.tencent.com/pypi/simple
+RUN pip config set install.trusted-host mirrors.cloud.tencent.com
+RUN pip install -r requirements.txt
 
-ENV HOST=0.0.0.0
-ENV TZ=Asia/Shanghai
+VOLUME /rustdesk-api-server/db.sqlite3
+
+ENV HOST 0.0.0.0
+ENV TZ=Asia/Shanghai \
+    DEBIAN_FRONTEND=noninteractive
+
 ENV CSRF_TRUSTED_ORIGINS=""
+
 
 EXPOSE 21114/tcp
 EXPOSE 21114/udp
 
-ENTRYPOINT ["sh", "run.sh"]
+RUN cd /rustdesk-api-server
+
+
+ENTRYPOINT ["bash", "run.sh"]
+
