@@ -7,10 +7,12 @@ services:
     environment:
       - HOST=0.0.0.0
       - TZ=Asia/Shanghai
-      - CSRF_TRUSTED_ORIGINS=<//域名:端口>
+      - CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114
     volumes:
-      - ./db.sqlite3:/rustdesk-api-server/db.sqlite3
+      - /yourpath/db:/rustdesk-api-server/db
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+    network_mode: bridge
     ports:
       - "21114:21114"
+    restart: unless-stopped
