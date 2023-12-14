@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}{{title}}{% endblock %}
+{% block legend_name %}信息{% endblock %}
+{% block content %} 
+<div style="padding: 20px; background-color: #F2F2F2;">
+  <div class="layui-row layui-col-space15">
+{% autoescape off %}
+    {{msg}}
+ {% endautoescape %}
+</div></div>
+
+{% endblock %}

@@ -93,6 +93,7 @@ admin.site.register(models.RustDeskToken, models.RustDeskTokenAdmin)
 admin.site.register(models.RustDeskTag, models.RustDeskTagAdmin)
 admin.site.register(models.RustDeskPeer, models.RustDeskPeerAdmin)
 admin.site.register(models.RustDesDevice, models.RustDesDeviceAdmin)
+admin.site.register(models.ShareLink, models.ShareLinkAdmin)
 admin.site.unregister(Group)
 admin.site.site_header = 'RustDesk自建Web'
 admin.site.site_title = '未定义'

@@ -11,17 +11,7 @@ from django.db.models import Q
 import copy
 from .views_front import *
 
-salt = 'xiaomo'
-EFFECTIVE_SECONDS = 7200
 
-def getStrMd5(s):
-    if not isinstance(s, (str,)):
-        s = str(s)
-
-    myHash = hashlib.md5()
-    myHash.update(s.encode())
-
-    return myHash.hexdigest()
 
 def login(request):
     result = {}
@@ -45,7 +35,7 @@ def login(request):
     user.rid = rid
     user.uuid = uuid
     user.autoLogin = autoLogin
-    user.rtype = rtype
+    user.rtype = rtype 
     user.deviceInfo = json.dumps(deviceInfo)
     user.save()
     

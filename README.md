@@ -3,7 +3,7 @@
 <p align="center">
     <i>一个 python 实现的 Rustdesk API 接口，支持 WebUI 管理</i>
     <br/>
-    <img src ="https://img.shields.io/badge/Version-1.1-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/Version-1.2-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/Python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
     <br/>
@@ -137,7 +137,7 @@ services:
 
 ## 开发计划
 
-- [ ] 分享设备给其他已注册用户
+- [-] 分享设备给其他已注册用户
 
   > 说明：类似网盘url分享，url激活后可以获得某个或某组或某个标签下的设备
   > 备注：其实web api作为中间件，可做的不多，更多功能还是需要修改客户端来实现，就不太值当了。

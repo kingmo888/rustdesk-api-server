@@ -87,4 +87,28 @@ class RustDesDeviceAdmin(admin.ModelAdmin):
     list_display = ('rid', 'hostname', 'memory', 'uuid', 'version', 'create_time', 'update_time')
     search_fields = ('hostname', 'memory')
     list_filter = ('rid', )
+
+
+
+class ShareLink(models.Model):
+    ''' 分享链接
+    '''
+    uid = models.CharField(verbose_name='用户ID', max_length=16)
+    shash = models.CharField(verbose_name='链接Key', max_length=60)
+    peers = models.CharField(verbose_name='机器ID列表', max_length=20)
+    is_used = models.BooleanField(verbose_name='是否使用', default=False)
+    is_expired = models.BooleanField(verbose_name='是否过期', default=False)
+    create_time = models.DateTimeField(verbose_name='生成时间', auto_now_add=True)
     
+
+    
+    class Meta:
+        ordering = ('-create_time',)
+        verbose_name = "分享链接"
+        verbose_name_plural = "链接列表" 
+        
+
+class ShareLinkAdmin(admin.ModelAdmin):
+    list_display = ('shash', 'uid', 'peers', 'is_used', 'is_expired', 'create_time')
+    search_fields = ('peers', )
+    list_filter = ('is_used', 'uid', 'is_expired' )
