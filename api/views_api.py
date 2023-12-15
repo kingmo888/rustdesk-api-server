@@ -106,7 +106,7 @@ def currentUser(request):
         if token:
             result['access_token'] = token.access_token
         result['type'] = 'access_token'
-        result['name'] = {user.username}
+        result['name'] = user.username
     return JsonResponse(result)
 
 
