@@ -89,12 +89,12 @@
         // you code ...
         // 为密码添加正则验证
         $('#pwd').blur(function() {
-                var reg = /^[\w]{8,20}$/;
+                var reg = /^[\w\S]{8,20}$/;
                 if(!($('#pwd').val().match(reg))){
                     //layer.msg('请输入合法密码');
                     $('#pwr').removeAttr('hidden');
                     $('#pri').attr('hidden','hidden');
-                    layer.msg('请输入8~20位密码。');
+                    layer.msg('请输入8~20位密码。可以包含字母、数字和特殊字符。');
                 }else {
                     $('#pri').removeAttr('hidden');
                     $('#pwr').attr('hidden','hidden');
