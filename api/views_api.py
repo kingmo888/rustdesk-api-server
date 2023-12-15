@@ -91,18 +91,22 @@ def currentUser(request):
     if request.method == 'GET':
         result['error'] = '错误的提交方式！'
         return JsonResponse(result)
-
     postdata = json.loads(request.body)
     rid = postdata.get('id', '')
     uuid = postdata.get('uuid', '')
-
-    user = UserProfile.objects.filter(Q(rid=rid) & Q(uuid=uuid)).first()
-    token = RustDeskToken.objects.filter(Q(uid=user.id) & Q(rid=user.rid)).first()
+    
+    access_token = request.META.get('HTTP_AUTHORIZATION', '')
+    access_token = access_token.split('Bearer ')[-1]
+    token = RustDeskToken.objects.filter(Q(access_token=access_token) ).first()
+    user = None
+    if token:
+        user = UserProfile.objects.filter(Q(id=token.uid)).first()
+    
     if user:
         if token:
             result['access_token'] = token.access_token
         result['type'] = 'access_token'
-        result['user'] = {'name':user.username}
+        result['name'] = {user.username}
     return JsonResponse(result)
 
 
