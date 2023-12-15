@@ -36,8 +36,9 @@
  - 支持设备在线统计。
  - 支持设备密码保存。
  - 利用心跳接口自动管理token并保活。
- - 支持分享设备给其他用户（本功能暂未实现）。
-
+ - 支持分享设备给其他用户。
+![Rust Share](images/share.png)
+ 
 后台主页：
 ![Admin Main](images/admin_main.png)
 
