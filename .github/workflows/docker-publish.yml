@@ -7,8 +7,13 @@ permissions:
 on:
   workflow_dispatch:
   push:
+    branches:
+      - master
     tags:
       - "v*.*"
+  pull_request:
+    branches:
+      - 'master'
 
 env:
   REGISTRY: ghcr.io

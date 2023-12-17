@@ -19,26 +19,23 @@
 
 ## 功能特点
 
- - 支持前台网页自主注册和登录。
-   - 注册页与登录页：
+- 支持前台网页自主注册和登录。
+  - 注册页与登录页：
+  ![Front Registration](images/front_reg.png)
+  ![Front Login](images/front_login.png)
 
-![Front Registration](images/front_reg.png)
-
-![Front Login](images/front_login.png)
-
- - 支持前台展示设备信息，分为管理员版、用户版。
- - 支持自定义别名（备注）。
- - 支持后台管理。
- - 支持彩色标签。
-
+- 支持前台展示设备信息，分为管理员版、用户版。
+- 支持自定义别名（备注）。
+- 支持后台管理。
+- 支持彩色标签。
 ![Rust Books](images/rust_books.png)
 
- - 支持设备在线统计。
- - 支持设备密码保存。
- - 利用心跳接口自动管理token并保活。
- - 支持分享设备给其他用户。
+- 支持设备在线统计。
+- 支持设备密码保存。
+- 利用心跳接口自动管理token并保活。
+- 支持分享设备给其他用户。
 ![Rust Share](images/share.png)
- 
+
 后台主页：
 ![Admin Main](images/admin_main.png)
 
@@ -98,7 +95,7 @@ docker run -d \
   -v /etc/localtime:/etc/localtime:ro \
   --network bridge \
   --restart unless-stopped \
-  ghcr.io/kingmo888/rustdesk-api-server:master
+  ghcr.io/kingmo888/rustdesk-api-server:latest
 ```
 
 docker-compose 方式：
@@ -108,7 +105,7 @@ version: "3.8"
 services:
   rustdesk-api-server:
     container_name: rustdesk-api-server
-    image: ghcr.io/kingmo888/rustdesk-api-server:master
+    image: ghcr.io/kingmo888/rustdesk-api-server:latest
     environment:
       - HOST=0.0.0.0
       - TZ=Asia/Shanghai
@@ -138,7 +135,7 @@ services:
 
 ## 开发计划
 
-- [-] 分享设备给其他已注册用户
+- [x] 分享设备给其他已注册用户（v1.3）
 
   > 说明：类似网盘url分享，url激活后可以获得某个或某组或某个标签下的设备
   > 备注：其实web api作为中间件，可做的不多，更多功能还是需要修改客户端来实现，就不太值当了。
