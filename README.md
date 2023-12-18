@@ -143,3 +143,6 @@ services:
 - [ ] 集成Web客户端形式
 
   > 将大神的web客户端集成进来（待议）
+
+## 其他相关工具
+[可以修改客户端ID的CMD脚本](https://github.com/abdullah-erturk/RustDesk-ID-Changer)
