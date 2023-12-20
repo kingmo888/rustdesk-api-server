@@ -3,7 +3,7 @@
 <p align="center">
     <i>一个 python 实现的 Rustdesk API 接口，支持 WebUI 管理</i>
     <br/>
-    <img src ="https://img.shields.io/badge/Version-1.3-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/Version-1.4-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/Python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
     <br/>
@@ -35,6 +35,8 @@
 - 利用心跳接口自动管理token并保活。
 - 支持分享设备给其他用户。
 ![Rust Share](images/share.png)
+- 支持web控制端（目前仅支持非SSL模式，见下面使用问题说明）
+![Rust Share](images/webui.png)
 
 后台主页：
 ![Admin Main](images/admin_main.png)
@@ -132,17 +134,21 @@ services:
 - 连接速度慢
 
   新版本Key模式链接速度慢，可以在服务端启动服务时，不要带参数的-k，此时，客户端也不能配置key。
+  
+- Web控制端一直转圈
 
-## 开发计划
+  web控制端目前仅支持非SSL模式，若webui为https访问，请将s去掉，否则ws连不上一直转圈。如：https://domain.com/webui，改为http://domain.com/webui
+
+## [x] 开发计划
 
 - [x] 分享设备给其他已注册用户（v1.3）
 
   > 说明：类似网盘url分享，url激活后可以获得某个或某组或某个标签下的设备
   > 备注：其实web api作为中间件，可做的不多，更多功能还是需要修改客户端来实现，就不太值当了。
 
-- [ ] 集成Web客户端形式
+- [x] 集成Web客户端形式
 
-  > 将大神的web客户端集成进来（待议）
+  > 将大神的web客户端集成进来,已集成。 [来源](https://www.52pojie.cn/thread-1708319-1-1.html)
 
 ## 其他相关工具
 

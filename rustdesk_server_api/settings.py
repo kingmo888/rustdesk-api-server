@@ -21,7 +21,8 @@ SECURE_CROSS_ORIGIN_OPENER_POLICY = 'None'
 
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'j%7yjvygpih=6b%qf!q%&ixpn+27dngzdu-i3xh-^3xgy3^nnc'
-
+# ID服务器IP或域名，一般与中继服务器，用于web client
+ID_SERVER = '127.0.0.1'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
@@ -38,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'api',
+    'webui',
 ]
 
 MIDDLEWARE = [

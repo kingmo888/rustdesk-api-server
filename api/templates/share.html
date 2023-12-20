@@ -20,8 +20,8 @@
           <table class="layui-table">
             <colgroup>
               <col width="30">
-              <col width="100">
-              <col width="300">
+              <col width="150">
+              <col width="200">
               <col>
             </colgroup>
             <thead>
@@ -35,7 +35,7 @@
             
             {% for one in sharelinks %}
               <tr>
-                <td>{{one.shash}} </td>
+                <td><script> document.write(window.location);</script>{{one.shash}} </td>
                 <td>{{one.create_time}}		</td>
                 <td>{{one.peers}}		</td>
 

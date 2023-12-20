@@ -26,6 +26,7 @@ def settings(request):
         context['username'] = username
         context['is_admin'] = u.is_admin
         context['is_active'] = u.is_active
+        context['domain'] = _settings.ID_SERVER
 
         logger.info("set system status variable")
     except Exception as e:
