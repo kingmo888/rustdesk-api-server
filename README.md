@@ -91,7 +91,7 @@ docker run -d \
   -p 21114:21114 \
   -e HOST=0.0.0.0 \
   -e TZ=Asia/Shanghai \
-  -e CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114 \ #修改CSRF_TRUSTED_ORIGINS为你的访问地址
+  -e CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114 \ #修改CSRF_TRUSTED_ORIGINS为你的访问地址，SSL以https开头
   -v /yourpath/db:/rustdesk-api-server/db \ #修改/yourpath/db为你宿主机数据库挂载目录
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
@@ -111,7 +111,7 @@ services:
     environment:
       - HOST=0.0.0.0
       - TZ=Asia/Shanghai
-      - CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114 #修改CSRF_TRUSTED_ORIGINS为你的访问地址
+      - CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114 #修改CSRF_TRUSTED_ORIGINS为你的访问地址，SSL以https开头
     volumes:
       - /yourpath/db:/rustdesk-api-server/db #修改/yourpath/db为你宿主机数据库挂载目录
       - /etc/timezone:/etc/timezone:ro
@@ -142,6 +142,10 @@ services:
 - Web控制端一直转圈
 
   web控制端目前仅支持非SSL模式，若webui为https访问，请将s去掉，否则ws连不上一直转圈。如：https://domain.com/webui，改为http://domain.com/webui
+  
+- 后台操作登录或登出时：CSRF验证失败. 请求被中断.
+
+  这种操作大概率是docker配置+nginx反代+SSL的组合，要注意修改CSRF_TRUSTED_ORIGINS，如果是ssl那就是https开头，否则就是http。
 
 ## [x] 开发计划
 
