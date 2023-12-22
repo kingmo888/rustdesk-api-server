@@ -65,7 +65,7 @@ def model_to_dict2(instance, fields=None, exclude=None, replace=None, default=No
         # 如果exclude 传递了，要进行判断
         if exclude and f.name in exclude:
             continue
- 
+
         key = f.name
         # 获取字段对应的数据
         if type(f) == DateTimeField:
@@ -122,7 +122,7 @@ def user_login(request):
     password = request.POST.get('password', '')
     if not username or not password:
         return JsonResponse({'code':0, 'msg':'出了点问题。'})
-    
+
     user = auth.authenticate(username=username,password=password)
     if user:
         auth.login(request, user)
@@ -146,7 +146,7 @@ def user_register(request):
         info = '用户名不得小于3位'
         result['msg'] = info
         return JsonResponse(result)
-    
+
     if len(password1)<8 or len(password1)>20:
         info = '密码长度不符合要求, 应在8~20位。'
         result['msg'] = info
@@ -188,7 +188,7 @@ def get_single_info(uid):
 
     for rid in peers.keys():
         peers[rid]['has_rhash'] = '是' if len(peers[rid]['rhash'])>1 else '否'
-    
+
     return [v for k,v in peers.items()]
 
 def get_all_info():
@@ -199,7 +199,7 @@ def get_all_info():
         user = UserProfile.objects.filter(Q(id=peer.uid)).first()
         device = devices.get(peer.rid, None)
         if device:
-            devices['rust_user'] = user.username
+            devices[peer.rid]['rust_user'] = user.username
     return [v for k,v in devices.items()]
 
 @login_required(login_url='/api/user_action?action=login')
@@ -225,14 +225,14 @@ def check_sharelink_expired(sharelink):
         sharelink.is_expired = True
         sharelink.save()
         return True
-    
+
 
 @login_required(login_url='/api/user_action?action=login')
 def share(request):
     peers = RustDeskPeer.objects.filter(Q(uid=request.user.id))
     sharelinks = ShareLink.objects.filter(Q(uid=request.user.id) & Q(is_used=False) & Q(is_expired=False))
-    
-    
+
+
     # 省资源：处理已过期请求，不主动定时任务轮询请求，在任意地方请求时，检查是否过期，过期则保存。
     now = datetime.datetime.now()
     for sl in sharelinks:
@@ -240,7 +240,7 @@ def share(request):
     sharelinks = ShareLink.objects.filter(Q(uid=request.user.id) & Q(is_used=False) & Q(is_expired=False))
     peers = [{'id':ix+1, 'name':f'{p.rid}|{p.alias}'} for ix, p in enumerate(peers)]
     sharelinks = [{'shash':s.shash, 'is_used':s.is_used, 'is_expired':s.is_expired, 'create_time':s.create_time, 'peers':s.peers} for ix, s in enumerate(sharelinks)]
-    
+
     if request.method == 'GET':
         url = request.build_absolute_uri()
         if url.endswith('share'):
@@ -267,7 +267,7 @@ def share(request):
                     peers_self_ids = [x.rid for x in RustDeskPeer.objects.filter(Q(uid=request.user.id))]
                     peers_share = RustDeskPeer.objects.filter(rid__in=peers)
                     peers_share_ids = [x.rid for x in peers_share]
-                    
+
                     for peer in peers_share:
                         if peer.rid in peers_self_ids:
                             continue
@@ -276,9 +276,9 @@ def share(request):
                         peer.uid = request.user.id
                         peer.save()
                         msg += f"{peer.rid},"
-                    
+
                     msg += '已被成功获取。'
- 
+
             return render(request, 'msg.html', {'title':msg, 'msg':msg})
     else:
         data = request.POST.get('data', '[]')
@@ -296,4 +296,4 @@ def share(request):
         sharelink.save()
 
         return JsonResponse({'code':1, 'shash':sharelink.shash})
-        
+
