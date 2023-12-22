@@ -127,8 +127,8 @@ services:
 | `HOST` | 默认 `0.0.0.0` | 绑定服务的IP |
 | `TZ` | 默认 `Asia/Shanghai`，可选 | 时区 |
 | `SECRET_KEY` | 可选，自定义一串随机字符 | 程序加密秘钥 |
-| `CSRF_TRUSTED_ORIGINS` | 可选，默认关闭验证；如需开启填写你的访问地址 `http://yourdomain.com:21114`。 **如需关闭验证请删除此变量，而不是留空** | 防跨域信任来源 |
-| `ID_SERVER` | 可选，默认为和API服务器同主机。可自定义如 `yourdomain.com` | Web控制端使用的ID服务器 |
+| `CSRF_TRUSTED_ORIGINS` | 可选，默认关闭验证；<br>如需开启填写你的访问地址 `http://yourdomain.com:21114` <br>**如需关闭验证请删除此变量，而不是留空** | 防跨域信任来源 |
+| `ID_SERVER` | 可选，默认为和API服务器同主机。<br>可自定义如 `yourdomain.com` | Web控制端使用的ID服务器 |
 | `DEBUG` | 可选，默认 `False` | 调试模式 |
 
 ## 使用问题
@@ -145,13 +145,15 @@ services:
 
   新版本Key模式链接速度慢，可以在服务端启动服务时，不要带参数的-k，此时，客户端也不能配置key。
 
-- Web控制端启用
+- Web控制端配置
 
-  修改rustdesk_server_api/settings.py文件中ID_SERVER配置项，将ID服务器/中继服务器IP或域名填上。
+  - 设置ID_SERVER环境变量，或修改rustdesk_server_api/settings.py文件中ID_SERVER配置项，将ID服务器/中继服务器IP或域名填上。
 
 - Web控制端一直转圈
 
-  web控制端目前仅支持非SSL模式，若webui为https访问，请将s去掉，否则ws连不上一直转圈。如：https://domain.com/webui，改为http://domain.com/webui
+  - 检查ID服务器填写是否正确
+
+  - Web控制端目前仅支持非SSL模式，若webui为https访问，请将s去掉，否则ws连不上一直转圈。如：https://domain.com/webui，改为http://domain.com/webui
 
 - 后台操作登录或登出时：CSRF验证失败. 请求被中断.
 
