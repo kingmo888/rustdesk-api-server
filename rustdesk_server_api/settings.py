@@ -14,17 +14,20 @@ from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-CSRF_TRUSTED_ORIGINS = [os.environ.get("CSRF_TRUSTED_ORIGINS", "http://www.baidu.com")]
-SECURE_CROSS_ORIGIN_OPENER_POLICY = 'None'
+if "CSRF_TRUSTED_ORIGINS" in os.environ:
+    CSRF_TRUSTED_ORIGINS = [os.environ["CSRF_TRUSTED_ORIGINS"]]
+else:
+    CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:21114"]
+    SECURE_CROSS_ORIGIN_OPENER_POLICY = 'None'
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'j%7yjvygpih=6b%qf!q%&ixpn+27dngzdu-i3xh-^3xgy3^nnc'
+SECRET_KEY = os.environ.get("SECRET_KEY", 'j%7yjvygpih=6b%qf!q%&ixpn+27dngzdu-i3xh-^3xgy3^nnc')
 # ID服务器IP或域名，一般与中继服务器，用于web client
-ID_SERVER = '127.0.0.1'
+ID_SERVER = os.environ.get("ID_SERVER", '')
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = os.environ.get("DEBUG", False)
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = 'api.UserProfile'      #AppName.自定义user
@@ -125,8 +128,8 @@ STATIC_URL = 'static/'
 
 if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
-    
+
 else:
 
-    
+
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')     # 新增

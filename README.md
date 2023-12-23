@@ -89,9 +89,8 @@ docker run 命令：
 docker run -d \
   --name rustdesk-api-server \
   -p 21114:21114 \
-  -e HOST=0.0.0.0 \
-  -e TZ=Asia/Shanghai \
-  -e CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114 \ #修改CSRF_TRUSTED_ORIGINS为你的访问地址，SSL以https开头
+  -e CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114 \ #防跨域信任来源，可选
+  -e ID_SERVER=yourdomain.com \ #Web控制端使用的ID服务器
   -v /yourpath/db:/rustdesk-api-server/db \ #修改/yourpath/db为你宿主机数据库挂载目录
   -v /etc/timezone:/etc/timezone:ro \
   -v /etc/localtime:/etc/localtime:ro \
@@ -109,9 +108,8 @@ services:
     container_name: rustdesk-api-server
     image: ghcr.io/kingmo888/rustdesk-api-server:latest
     environment:
-      - HOST=0.0.0.0
-      - TZ=Asia/Shanghai
-      - CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114 #修改CSRF_TRUSTED_ORIGINS为你的访问地址，SSL以https开头
+      - CSRF_TRUSTED_ORIGINS=http://yourdomain.com:21114 #防跨域信任来源，可选
+      - ID_SERVER=yourdomain.com #Web控制端使用的ID服务器
     volumes:
       - /yourpath/db:/rustdesk-api-server/db #修改/yourpath/db为你宿主机数据库挂载目录
       - /etc/timezone:/etc/timezone:ro
@@ -121,6 +119,18 @@ services:
       - "21114:21114"
     restart: unless-stopped
 ```
+
+## 环境变量
+
+| 变量名 | 参考值 | 备注 |
+| ---- | ------- | ----------- |
+| `HOST` | 默认 `0.0.0.0` | 绑定服务的IP |
+| `TZ` | 默认 `Asia/Shanghai`，可选 | 时区 |
+| `SECRET_KEY` | 可选，自定义一串随机字符 | 程序加密秘钥 |
+| `CSRF_TRUSTED_ORIGINS` | 可选，默认关闭验证；<br>如需开启填写你的访问地址 `http://yourdomain.com:21114` <br>**如需关闭验证请删除此变量，而不是留空** | 防跨域信任来源 |
+| `ID_SERVER` | 可选，默认为和API服务器同主机。<br>可自定义如 `yourdomain.com` | Web控制端使用的ID服务器 |
+| `DEBUG` | 可选，默认 `False` | 调试模式 |
+
 ## 使用问题
 
 - 管理员设置
@@ -134,34 +144,36 @@ services:
 - 连接速度慢
 
   新版本Key模式链接速度慢，可以在服务端启动服务时，不要带参数的-k，此时，客户端也不能配置key。
-  
-- Web控制端启用
 
-  修改rustdesk_server_api/settings.py文件中ID_SERVER配置项，将ID服务器/中继服务器IP或域名填上。
+- Web控制端配置
+
+  - 设置ID_SERVER环境变量，或修改rustdesk_server_api/settings.py文件中ID_SERVER配置项，将ID服务器/中继服务器IP或域名填上。
 
 - Web控制端一直转圈
 
-  web控制端目前仅支持非SSL模式，若webui为https访问，请将s去掉，否则ws连不上一直转圈。如：https://domain.com/webui，改为http://domain.com/webui
-  
+  - 检查ID服务器填写是否正确
+
+  - Web控制端目前仅支持非SSL模式，若webui为https访问，请将s去掉，否则ws连不上一直转圈。如：https://domain.com/webui，改为http://domain.com/webui
+
 - 后台操作登录或登出时：CSRF验证失败. 请求被中断.
 
   这种操作大概率是docker配置+nginx反代+SSL的组合，要注意修改CSRF_TRUSTED_ORIGINS，如果是ssl那就是https开头，否则就是http。
 
-## [x] 开发计划
+## 开发计划
 
-- [x] 分享设备给其他已注册用户（v1.3）
+- [x] 分享设备给其他已注册用户（v1.3+）
 
   > 说明：类似网盘url分享，url激活后可以获得某个或某组或某个标签下的设备
   > 备注：其实web api作为中间件，可做的不多，更多功能还是需要修改客户端来实现，就不太值当了。
 
-- [x] 集成Web客户端形式
+- [x] 集成Web客户端形式（v1.4+）
 
-  > 将大神的web客户端集成进来,已集成。 [来源](https://www.52pojie.cn/thread-1708319-1-1.html)
+  > 将大神的web客户端集成进来，已集成。 [来源](https://www.52pojie.cn/thread-1708319-1-1.html)
 
 ## 其他相关工具
 
-[可以修改客户端ID的CMD脚本](https://github.com/abdullah-erturk/RustDesk-ID-Changer)
+- [可以修改客户端ID的CMD脚本](https://github.com/abdullah-erturk/RustDesk-ID-Changer)
 
-[rustdesk](https://github.com/rustdesk/rustdesk)
+- [rustdesk](https://github.com/rustdesk/rustdesk)
 
-[rustdesk-server](https://github.com/rustdesk/rustdesk-server)
+- [rustdesk-server](https://github.com/rustdesk/rustdesk-server)

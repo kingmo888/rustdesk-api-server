@@ -1,118 +1,97 @@
 {% extends "base.html" %}
 {% block title %}RustDesk WebUI{% endblock %}
 {% block legend_name %}综合屏{% endblock %}
-{% block content %} 
+{% block content %}
 <div style="padding: 20px; background-color: #F2F2F2;">
   <div class="layui-row layui-col-space15">
- <div class="layui-col-md15">
+    <div class="layui-col-md15">
       <div class="layui-card">
         <div class="layui-card-header">设备统计 - 【用户名:{{u.username}}】</div>
         <div class="layui-card-body">
-  <table class="layui-table">
-    <colgroup>
-      <col width="30">
-      <col width="30">
-      <col width="100">
-      <col>
-    </colgroup>
-    <thead>
-      <tr>
-        <th>客户端ID</th>
-        <th>版本</th>
-        <th>连接密码</th>
-        <th>系统用户名</th>
-        <th>计算机名</th>
-        <th>别名</th>
-        <th>平台</th>
-        <th>系统</th>
-        <th>CPU</th>
-        <th>内存</th>
-        <th>注册时间</th>
-        <th>更新时间</th>
-
-      </tr> 
-    </thead>
-    <tbody>
-	
-	{% for one in single_info %}
-      <tr>
-        <td>{{one.rid}} </td>
-        <td>{{one.version}}		</td>
-        <td>{{one.has_rhash}}		</td>
-        <td>{{one.username}}		</td>
-        <td>{{one.hostname}}		</td>
-        <td>{{one.alias}}		</td>
-        <td>{{one.platform}}		</td>
-        <td>{{one.os}}		</td>
-        <td>{{one.cpu}}		</td>
-        <td>{{one.memory}}		</td>
-        <td>{{one.create_time}}		</td>
-        <td>{{one.update_time}}		</td>
-
-		
-
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <th>客户端ID</th>
+                <th>版本</th>
+                <th>连接密码</th>
+                <th>系统用户名</th>
+                <th>计算机名</th>
+                <th>别名</th>
+                <th>平台</th>
+                <th>系统</th>
+                <th>CPU</th>
+                <th>内存</th>
+                <th>注册时间</th>
+                <th>更新时间</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for one in single_info %}
+              <tr>
+                <td>{{one.rid}} </td>
+                <td>{{one.version}}</td>
+                <td>{{one.has_rhash}}</td>
+                <td>{{one.username}}</td>
+                <td>{{one.hostname}}</td>
+                <td>{{one.alias}}</td>
+                <td>{{one.platform}}</td>
+                <td>{{one.os}}</td>
+                <td>{{one.cpu}}</td>
+                <td>{{one.memory}}</td>
+                <td>{{one.create_time}}</td>
+                <td>{{one.update_time}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-    
-    
-{% if u.is_admin %}
-<div class="layui-col-md15">
+
+    {% if u.is_admin %}
+    <div class="layui-col-md15">
       <div class="layui-card">
         <div class="layui-card-header">全部用户</div>
         <div class="layui-card-body">
-  <table class="layui-table">
-    <colgroup>
-      <col width="30">
-      <col width="30">
-      <col width="100">
-      <col>
-    </colgroup>
-    <thead>
-      <tr>
-        <th>客户端ID</th>
-        <th>所属用户</th>
-        <th>版本</th>
-        <th>系统用户名</th>
-        <th>计算机名</th>
-        <th>系统</th>
-        <th>CPU</th>
-        <th>内存</th>
-        <th>注册时间</th>
-        <th>更新时间</th>
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <th>客户端ID</th>
+                <th>所属用户</th>
+                <th>版本</th>
+                <th>系统用户名</th>
+                <th>计算机名</th>
+                <th>系统</th>
+                <th>CPU</th>
+                <th>内存</th>
+                <th>注册时间</th>
+                <th>更新时间</th>
+              </tr>
+            </thead>
+            <tbody>
 
-      </tr> 
-    </thead>
-    <tbody>
-	
-	{% for one in all_info %}
-      <tr>
-        <td>{{one.rid}} </td>
-        <td>{{one.rust_user}}		</td>
-        <td>{{one.version}}		</td>
-        <td>{{one.username}}		</td>
-        <td>{{one.hostname}}		</td>
-        <td>{{one.os}}		</td>
-        <td>{{one.cpu}}		</td>
-        <td>{{one.memory}}		</td>
-        <td>{{one.create_time}}		</td>
-        <td>{{one.update_time}}		</td>
-
-		
-
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
+              {% for one in all_info %}
+              <tr>
+                <td>{{one.rid}} </td>
+                <td>{{one.rust_user}} </td>
+                <td>{{one.version}} </td>
+                <td>{{one.username}} </td>
+                <td>{{one.hostname}} </td>
+                <td>{{one.os}} </td>
+                <td>{{one.cpu}} </td>
+                <td>{{one.memory}} </td>
+                <td>{{one.create_time}} </td>
+                <td>{{one.update_time}} </td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
-{% endif %}
+    {% endif %}
 
-</div></div>
+  </div>
+</div>
 
 {% endblock %}

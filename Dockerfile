@@ -8,9 +8,8 @@ RUN set -ex \
     && rm -rf /var/cache/apk/* \
     && cp -r ./db ./db_bak
 
-ENV HOST=0.0.0.0
-ENV TZ=Asia/Shanghai
-ENV CSRF_TRUSTED_ORIGINS=""
+ENV HOST="0.0.0.0"
+ENV TZ="Asia/Shanghai"
 
 EXPOSE 21114/tcp
 EXPOSE 21114/udp
