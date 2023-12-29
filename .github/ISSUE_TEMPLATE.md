@@ -1,0 +1,42 @@
+name: Bug Report
+description: File a bug report
+title: "[Bug]: "
+labels: ["bug"]
+
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this bug report! Please searched for historical issues and check official documentation before opening this issue.
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: What happened?
+      description: Also tell us, what did you expect to happen?
+      placeholder: Tell us what you see!
+    validations:
+      required: true
+  - type: input
+    id: OS
+    attributes:
+      label: Operation System
+      description: Which operation system are you using?
+      placeholder: ex. Windows11 23H2
+    validations:
+      required: true
+  - type: input
+    id: Python
+    attributes:
+      label: Python Version
+      description: Which version of python are you using?
+      placeholder: ex. 3.8.6 64-bit
+    validations:
+      required: true
+  - type: input
+    id: PyQt
+    attributes:
+      label: Run type Python/Docker
+      description: Which type of package start?
+      placeholder: ex. docker-compose
+    validations:
+      required: true
