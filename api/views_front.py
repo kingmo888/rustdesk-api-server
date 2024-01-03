@@ -16,6 +16,7 @@ from django.db.models import Model
 import json
 import time
 import hashlib
+import sys
 
 salt = 'xiaomo'
 EFFECTIVE_SECONDS = 7200
@@ -100,6 +101,7 @@ def model_to_dict2(instance, fields=None, exclude=None, replace=None, default=No
 
 
 def index(request):
+    print('sdf',sys.argv)
     if request.user and request.user.username!='AnonymousUser':
         return HttpResponseRedirect('/api/work')
     return HttpResponseRedirect('/api/user_action?action=login')
@@ -113,6 +115,8 @@ def user_action(request):
         return user_login(request)
     if action == 'register':
         return user_register(request)
+    if action == 'logout':
+        return user_logout(request)
 
 def user_login(request):
     if request.method == 'GET':
@@ -169,7 +173,12 @@ def user_register(request):
     result['code'] = 1
     return JsonResponse(result)
 
-
+@login_required(login_url='/api/user_action?action=login')
+def user_logout(request):
+    info = ''
+    auth.logout(request)
+    return HttpResponseRedirect('/api/user_action?action=login')
+        
 def get_single_info(uid):
     peers = RustDeskPeer.objects.filter(Q(uid=uid))
     rids = [x.rid for x in peers]

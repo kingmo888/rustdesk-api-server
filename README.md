@@ -3,7 +3,7 @@
 <p align="center">
     <i>一个 python 实现的 Rustdesk API 接口，支持 WebUI 管理</i>
     <br/>
-    <img src ="https://img.shields.io/badge/Version-1.4.1-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/Version-1.4.2-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/Python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
     <br/>
@@ -43,13 +43,15 @@
 
 ## 安装
 
-### 开箱即用
+### 方法1：开箱即用
 
 仅支持Windows，请前往 release 下载，无需安装环境，直接运行`启动.bat`即可。独立版截图：
 
 ![window独立绿色版](/images/windows_run.png)
 
-### 代码运行
+另外，该方式下的webui(暂时)无法使用，可以通过domain.com:21114/static/web-client/index.html来访问。需要修改`_internal/static/web-client/index.html`中的23行为你的中继服务器地址。
+
+### 方法2：代码运行
 
 ```bash
 # 将代码克隆到本地
@@ -71,9 +73,9 @@ python manage.py runserver 0.0.0.0:21114
 from pysqlite3 import dbapi2 as Database # 启用pysqlite3
 ```
 
-### Docker 运行
+### 方法3：Docker 运行
 
-#### 自行构建
+#### Docker方法1：自行构建
 ```bash
 git clone https://github.com/kingmo888/rustdesk-api-server.git
 cd rustdesk-api-server
@@ -81,7 +83,7 @@ docker compose --compatibility up --build -d
 ```
 感谢热心网友 @ferocknew 提供。
 
-#### 预构建运行
+#### Docker方法2：预构建运行
 
 docker run 命令：
 
