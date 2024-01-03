@@ -10,7 +10,7 @@
     <img src ="https://img.shields.io/badge/Platform-Windows|Linux-green.svg"/>
     <img src ="https://img.shields.io/badge/Docker-arm|arm64|amd64-blue.svg" />
 </p>
- 
+
 ## 缘起
 
 看了市面上各类 RustDesk WEB API 版本，或多或少的存在一些问题，比如说，需要通过url注册、新版客户端某些接口不支持、无法方便的修改密码等不足，因此博采众长，撸一个自己喜欢的版本来用。在此要感谢论坛及github的各位朋友写的接口，省去了我抓包找接口的时间。
