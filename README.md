@@ -45,7 +45,7 @@
 
 ### 方法1：开箱即用
 
-仅支持Windows，请前往 release 下载，无需安装环境，直接运行`启动.bat`即可。独立版截图：
+仅支持Windows，请前往 release 下载，无需安装环境，直接运行`启动.bat`即可。 截图：
 
 ![window直接运行版](/images/windows_run.png)
 
