@@ -15,7 +15,9 @@ test
 # Files
 *.bat
 server.ico
+start.py
 
 # Build
 build
 dist
+dist-

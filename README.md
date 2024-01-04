@@ -49,7 +49,6 @@
 
 ![window独立绿色版](/images/windows_run.png)
 
-另外，该方式下的webui(暂时)无法使用，可以通过domain.com:21114/static/web-client/index.html来访问。需要修改`_internal/static/web-client/index.html`中的23行为你的中继服务器地址。
 
 ### 方法2：代码运行
 
