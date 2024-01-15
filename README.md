@@ -1,5 +1,7 @@
 # rustdesk-api-server
 
+[The English explanation is available by clicking here.](https://github.com/kingmo888/rustdesk-api-server/blob/master/README_EN.md)
+
 <p align="center">
     <i>一个 python 实现的 Rustdesk API 接口，支持 WebUI 管理</i>
     <br/>
@@ -10,6 +12,7 @@
     <img src ="https://img.shields.io/badge/Platform-Windows|Linux-green.svg"/>
     <img src ="https://img.shields.io/badge/Docker-arm|arm64|amd64-blue.svg" />
 </p>
+
 
 ## 缘起
 
