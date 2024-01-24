@@ -1,5 +1,7 @@
 # rustdesk-api-server
 
+## 如果项目有帮到你，给个stat不过分吧？
+
 [The English explanation is available by clicking here.](https://github.com/kingmo888/rustdesk-api-server/blob/master/README_EN.md)
 
 <p align="center">
