@@ -274,13 +274,22 @@ def share(request):
                     peers = peers.split(',')
                     # 自己的peers若重叠，需要跳过
                     peers_self_ids = [x.rid for x in RustDeskPeer.objects.filter(Q(uid=request.user.id))]
-                    peers_share = RustDeskPeer.objects.filter(rid__in=peers)
+                    peers_share = RustDeskPeer.objects.filter(Q(rid__in=peers) & Q(uid=sharelink.uid))
                     peers_share_ids = [x.rid for x in peers_share]
 
                     for peer in peers_share:
                         if peer.rid in peers_self_ids:
                             continue
-                        peer = RustDeskPeer.objects.get(rid=peer.rid)
+                        #peer = RustDeskPeer.objects.get(rid=peer.rid)
+                        peer_f = RustDeskPeer.objects.filter(Q(rid=peer.rid) & Q(uid=sharelink.uid))
+                        if not peer_f:
+                            msg += f"{peer.rid}已存在,"
+                            continue
+                        
+                        if len(peer_f) > 1:
+                             msg += f'{peer.rid}存在多个,已经跳过。 '
+                             continue
+                        peer = peer_f[0]
                         peer.id = None
                         peer.uid = request.user.id
                         peer.save()
