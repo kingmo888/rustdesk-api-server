@@ -1,6 +1,6 @@
 # rustdesk-api-server
 
-## 如果项目有帮到你，给个stat不过分吧？
+## 如果项目有帮到你，给个star不过分吧？
 
 [The English explanation is available by clicking here.](https://github.com/kingmo888/rustdesk-api-server/blob/master/README_EN.md)
 
@@ -183,3 +183,6 @@ services:
 - [rustdesk](https://github.com/rustdesk/rustdesk)
 
 - [rustdesk-server](https://github.com/rustdesk/rustdesk-server)
+
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/kingmo888/rustdesk-api-server.svg?variant=adaptive)](https://starchart.cc/kingmo888/rustdesk-api-server)
