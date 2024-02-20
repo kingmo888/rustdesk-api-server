@@ -21,5 +21,6 @@ start.py
 build
 dist
 dist-
+dist_py38
 
 LICENSE.rst
