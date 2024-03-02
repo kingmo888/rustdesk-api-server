@@ -200,6 +200,11 @@ def ab(request):
     }
     return JsonResponse(result)
 
+def ab_get(request):
+    # 兼容 x86-sciter 版客户端，此版客户端通过访问 "POST /api/ab/get" 来获取地址簿
+    request.method = 'GET'
+    return ab(request)
+
 def sysinfo(request):
     # 客户端注册服务后，才会发送设备信息
     result = {}
