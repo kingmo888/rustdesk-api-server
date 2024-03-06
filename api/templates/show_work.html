@@ -4,6 +4,7 @@
 {% block content %}
 <div style="padding: 20px; background-color: #F2F2F2;">
   <div class="layui-row layui-col-space15">
+    {% if not show_all %}
     <div class="layui-col-md15">
       <div class="layui-card">
         <div class="layui-card-header">设备统计 - 【用户名:{{u.username}}】</div>
@@ -26,7 +27,7 @@
               </tr>
             </thead>
             <tbody>
-              {% for one in single_info %}
+              {% for one in page_obj %}
               <tr>
                 <td>{{one.rid}} </td>
                 <td>{{one.version}}</td>
@@ -47,11 +48,32 @@
         </div>
       </div>
     </div>
+    <div class="layui-col-md4 layui-col-md-offset4">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <button class="layui-btn" ><a href="?page=1">&laquo; 首页</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.previous_page_number }}">上一页</a></button>
+          {% endif %}
+          {% if page_obj.paginator.num_pages > 1 %}
+          <span class="current">
+              页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+          </span>
+          {% endif %}
+          {% if page_obj.has_next %}
+              <button class="layui-btn" > <a href="?page={{ page_obj.next_page_number }}">下一页</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.paginator.num_pages }}">尾页 &raquo;</a></button>
+          {% endif %}
+      </span>
+  </div>  
+    {% endif %}
 
-    {% if u.is_admin %}
+    
+    {% if u.is_admin and show_all %}
     <div class="layui-col-md15">
       <div class="layui-card">
-        <div class="layui-card-header">全部用户</div>
+        <div class="layui-card-header">全部用户 &raquo;
+          <div class="layui-btn" ><a href="/api/down_peers">导出xlsx</a></div>
+        </div>
         <div class="layui-card-body">
           <table class="layui-table">
             <thead>
@@ -70,7 +92,7 @@
             </thead>
             <tbody>
 
-              {% for one in all_info %}
+              {% for one in page_obj %}
               <tr>
                 <td>{{one.rid}} </td>
                 <td>{{one.rust_user}} </td>
@@ -89,7 +111,27 @@
         </div>
       </div>
     </div>
+    <div class="layui-col-md4 layui-col-md-offset4">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <button class="layui-btn" ><a href="?show_type=admin&page=1">&laquo; 首页</a></button>
+              <button class="layui-btn" ><a href="?show_type=admin&page={{ page_obj.previous_page_number }}">上一页</a></button>
+          {% endif %}
+          {% if page_obj.paginator.num_pages > 1 %}
+          <span class="current">
+              页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+          </span>
+          {% endif %}
+          {% if page_obj.has_next %}
+              <button class="layui-btn" > <a href="?show_type=admin&page={{ page_obj.next_page_number }}">下一页</a></button>
+              <button class="layui-btn" ><a href="?show_type=admin&page={{ page_obj.paginator.num_pages }}">尾页 &raquo;</a></button>
+          {% endif %}
+      </span>
+  </div>  
     {% endif %}
+
+ 
+  
 
   </div>
 </div>

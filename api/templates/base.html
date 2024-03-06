@@ -28,6 +28,10 @@
 
     <ul class="layui-nav">
         <li class="layui-nav-item"><a href="/">首页</a></li>
+        {% if u.is_admin %}
+        <li class="layui-nav-item"><a href="/api/work?show_type=admin">所有设备</a>
+        </li>
+        {% endif %}
         <li class="layui-nav-item"><a href="/api/share">分享</a></li>
         <li class="layui-nav-item"><a href="/webui" target="_blank">网页控制</a></li>
 

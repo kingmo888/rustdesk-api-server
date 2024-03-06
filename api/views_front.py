@@ -8,6 +8,8 @@ from django.contrib.auth.decorators import login_required
 from django.contrib import auth
 from api.models import RustDeskPeer, RustDesDevice, UserProfile, ShareLink
 from django.forms.models import model_to_dict
+from django.core.paginator import Paginator
+from django.http import HttpResponse
 
 from itertools import chain
 from django.db.models.fields import DateTimeField, DateField, CharField, TextField
@@ -17,6 +19,9 @@ import json
 import time
 import hashlib
 import sys
+
+from io import BytesIO
+import xlwt
 
 salt = 'xiaomo'
 EFFECTIVE_SECONDS = 7200
@@ -213,17 +218,45 @@ def get_all_info():
 
 @login_required(login_url='/api/user_action?action=login')
 def work(request):
-
     username = request.user
     u = UserProfile.objects.get(username=username)
-    single_info = get_single_info(u.id)
+    
+    show_type = request.GET.get('show_type', '')
+    show_all = True if show_type == 'admin' and u.is_admin else False
+    paginator = Paginator(get_all_info(), 15) if show_type == 'admin' and u.is_admin else Paginator(get_single_info(u.id), 15)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'show_work.html', {'u':u, 'show_all':show_all, 'page_obj':page_obj})
 
+@login_required(login_url='/api/user_action?action=login')
+def down_peers(request):
+    username = request.user
+    u = UserProfile.objects.get(username=username)
+
+    if not u.is_admin:
+        print(u.is_admin)
+        return HttpResponseRedirect('/api/work')
+    
     all_info = get_all_info()
-    print(all_info)
+    f = xlwt.Workbook(encoding='utf-8')
+    sheet1 = f.add_sheet(u'设备信息表', cell_overwrite_ok=True)
+    all_fields = [x.name for x in RustDesDevice._meta.get_fields()]
+    all_fields.append('rust_user')
+    for i, one in enumerate(all_info):
+        for j, name in enumerate(all_fields):
+            if i == 0:
+                # 写入列名
+                sheet1.write(i, j, name)
+            sheet1.write(i+1, j, one.get(name, '-'))
 
-    return render(request, 'show_work.html', {'single_info':single_info, 'all_info':all_info, 'u':u})
-
-
+    sio = BytesIO()
+    f.save(sio)
+    sio.seek(0)
+    response = HttpResponse(sio.getvalue(), content_type='application/vnd.ms-excel')
+    response['Content-Disposition'] = 'attachment; filename=DeviceInfo.xls'
+    response.write(sio.getvalue())
+    return response
+    
 def check_sharelink_expired(sharelink):
     now = datetime.datetime.now()
     if sharelink.create_time > now:

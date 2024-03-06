@@ -7,7 +7,7 @@
 <p align="center">
     <i>一个 python 实现的 Rustdesk API 接口，支持 WebUI 管理</i>
     <br/>
-    <img src ="https://img.shields.io/badge/Version-1.4.5-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/Version-1.4.6-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/Python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
     <br/>
@@ -175,9 +175,11 @@ services:
 
   > 通过配置方式，对过期超过指定时间的设备清理或过滤。
 
-- [ ] 首屏拆分为用户列表页与管理员列表页并增加分页。
+- [x] 首屏拆分为用户列表页与管理员列表页并增加分页。
 
-- [ ] 支持信息导出到为xlsx文件。
+- [x] 支持信息导出到为xlsx文件。
+
+  > 支持管理员在【所有设备】页面导出所有设备信息。
 
 
 ## 其他相关工具
