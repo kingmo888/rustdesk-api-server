@@ -2,6 +2,8 @@
 
 ## 如果项目有帮到你，给个star不过分吧？
 
+## 请使用客户端最新版本1.2.3
+
 [The English explanation is available by clicking here.](https://github.com/kingmo888/rustdesk-api-server/blob/master/README_EN.md)
 
 <p align="center">
