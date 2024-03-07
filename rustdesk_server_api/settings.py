@@ -32,6 +32,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 ALLOWED_HOSTS = ["*"]
 AUTH_USER_MODEL = 'api.UserProfile'      #AppName.自定义user
 
+ALLOW_REGISTRATION = False               # 是否允许注册, True为允许，False为不允许
+
 # Application definition
 
 INSTALLED_APPS = [

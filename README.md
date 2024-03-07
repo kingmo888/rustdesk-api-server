@@ -7,7 +7,7 @@
 <p align="center">
     <i>一个 python 实现的 Rustdesk API 接口，支持 WebUI 管理</i>
     <br/>
-    <img src ="https://img.shields.io/badge/Version-1.4.6-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/Version-1.4.7-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/Python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
     <br/>
@@ -131,6 +131,7 @@ services:
 | `CSRF_TRUSTED_ORIGINS` | 可选，默认关闭验证；<br>如需开启填写你的访问地址 `http://yourdomain.com:21114` <br>**如需关闭验证请删除此变量，而不是留空** | 防跨域信任来源 |
 | `ID_SERVER` | 可选，默认为和API服务器同主机。<br>可自定义如 `yourdomain.com` | Web控制端使用的ID服务器 |
 | `DEBUG` | 可选，默认 `False` | 调试模式 |
+| `ALLOW_REGISTRATION` | 可选，默认 `True` | 是否允许新用户注册 |
 
 ## 使用问题
 
@@ -171,16 +172,17 @@ services:
 
   > 将大神的web客户端集成进来，已集成。 [来源](https://www.52pojie.cn/thread-1708319-1-1.html)
   
-- [ ] 对过期（不在线）设备的过滤，用以区分在线&离线设备
+- [ ] 对过期（不在线）设备的过滤，用以区分在线&离线设备(1.4.7)
 
   > 通过配置方式，对过期超过指定时间的设备清理或过滤。
 
-- [x] 首屏拆分为用户列表页与管理员列表页并增加分页。
+- [x] 首屏拆分为用户列表页与管理员列表页并增加分页(1.4.6)。
 
-- [x] 支持信息导出到为xlsx文件。
+- [x] 支持信息导出到为xlsx文件(1.4.6)。
 
   > 支持管理员在【所有设备】页面导出所有设备信息。
 
+- [x] 通过配置项设定是否允许新用户注册(1.4.7)。
 
 ## 其他相关工具
 
