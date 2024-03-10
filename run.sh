@@ -7,4 +7,6 @@ if [ ! -e "./db/db.sqlite3" ]; then
     echo "首次运行，初始化数据库"
 fi
 
+python manage.py makemigrations
+python manage.py migrate
 python manage.py runserver $HOST:21114;
