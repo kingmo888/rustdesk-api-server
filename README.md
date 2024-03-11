@@ -134,6 +134,14 @@ services:
 | `ID_SERVER` | 可选，默认为和API服务器同主机。<br>可自定义如 `yourdomain.com` | Web控制端使用的ID服务器 |
 | `DEBUG` | 可选，默认 `False` | 调试模式 |
 | `ALLOW_REGISTRATION` | 可选，默认 `True` | 是否允许新用户注册 |
+| 数据库配置 | -- 开始 -- | 若不使用MYSQL则以下皆无需配置 |
+| `DATABASE_TYPE` | 可选，默认 `SQLITE3` | 数据库类型(SQLITE/MYSQL) |
+| `MYSQL_NAME` | 可选，默认 `-` | MYSQL数据库名称 |
+| `MYSQL_HOST` | 可选，默认 `127.0.0.1` | MYSQL数据库的服务器IP |
+| `MYSQL_USER` | 可选，默认 `-` | MYSQL数据库的用户名 |
+| `MYSQL_PASSWORD` | 可选，默认 `-` | MYSQL数据库的密码 |
+| `MYSQL_PORT` | 可选，默认 `3306` | MYSQL数据库端口 |
+| 数据库配置 | -- 结束 -- | 查看【[sqlite3迁移mysql教程](https://www.52pojie.cn/thread-1708319-1-1.html)】 |
 
 ## 使用问题
 
@@ -174,7 +182,7 @@ services:
 
   > 将大神的web客户端集成进来，已集成。 [来源](https://www.52pojie.cn/thread-1708319-1-1.html)
   
-- [ ] 对过期（不在线）设备的过滤，用以区分在线&离线设备(1.4.7)
+- [x] 对过期（不在线）设备的过滤，用以区分在线&离线设备(1.4.7)
 
   > 通过配置方式，对过期超过指定时间的设备清理或过滤。
 
@@ -185,6 +193,8 @@ services:
   > 支持管理员在【所有设备】页面导出所有设备信息。
 
 - [x] 通过配置项设定是否允许新用户注册(1.4.7)。
+
+- [ ] 支持mysql及sqlite3迁移mysql。
 
 ## 其他相关工具
 
