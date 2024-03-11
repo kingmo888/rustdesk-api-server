@@ -34,6 +34,16 @@ AUTH_USER_MODEL = 'api.UserProfile'      #AppName.自定义user
 
 ALLOW_REGISTRATION = os.environ.get("ALLOW_REGISTRATION", True)               # 是否允许注册, True为允许，False为不允许
 
+#==========数据库配置 开始=====================
+DATABASE_TYPE = os.environ.get("DATABASE_TYPE", 'SQLITE')
+MYSQL_DBNAME = os.environ.get("MYSQL_DBNAME", '-')
+MYSQL_HOST = os.environ.get("MYSQL_HOST", '127.0.0.1')
+MYSQL_USER = os.environ.get("MYSQL_USER", '-')
+MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", '-')
+MYSQL_PORT = os.environ.get("MYSQL_PORT", '3306')
+#==========数据库配置 结束=====================
+
+
 # Application definition
 
 INSTALLED_APPS = [
@@ -82,13 +92,26 @@ WSGI_APPLICATION = 'rustdesk_server_api.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db/db.sqlite3',
     }
 }
-
+if DATABASE_TYPE == 'MYSQL' and MYSQL_DBNAME!='-' and USER!= '-' and PASSWORD!='-':
+    # 简单通过数据库名、账密信息过滤下，防止用户未配置mysql却使用mysql
+    DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': MYSQL_DBNAME,               # 数据库名
+        'HOST': MYSQL_HOST,                 # 数据库服务器IP
+        'USER': MYSQL_USER,                 # 数据库用户名
+        'PASSWORD': MYSQL_PASSWORD,         # 数据库密码
+        'PORT': MYSQL_PORT,                 # 端口
+        'OPTIONS': {'charset': 'utf8'},
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators

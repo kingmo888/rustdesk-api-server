@@ -9,7 +9,7 @@
 <p align="center">
     <i>一个 python 实现的 Rustdesk API 接口，支持 WebUI 管理</i>
     <br/>
-    <img src ="https://img.shields.io/badge/Version-1.4.7-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/Version-1.4.8-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/Python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
     <br/>
@@ -136,12 +136,12 @@ services:
 | `ALLOW_REGISTRATION` | 可选，默认 `True` | 是否允许新用户注册 |
 | 数据库配置 | -- 开始 -- | 若不使用MYSQL则以下皆无需配置 |
 | `DATABASE_TYPE` | 可选，默认 `SQLITE3` | 数据库类型(SQLITE/MYSQL) |
-| `MYSQL_NAME` | 可选，默认 `-` | MYSQL数据库名称 |
+| `MYSQL_DBNAME` | 可选，默认 `-` | MYSQL数据库名称 |
 | `MYSQL_HOST` | 可选，默认 `127.0.0.1` | MYSQL数据库的服务器IP |
 | `MYSQL_USER` | 可选，默认 `-` | MYSQL数据库的用户名 |
 | `MYSQL_PASSWORD` | 可选，默认 `-` | MYSQL数据库的密码 |
 | `MYSQL_PORT` | 可选，默认 `3306` | MYSQL数据库端口 |
-| 数据库配置 | -- 结束 -- | 查看【[sqlite3迁移mysql教程](https://www.52pojie.cn/thread-1708319-1-1.html)】 |
+| 数据库配置 | -- 结束 -- | 查看【[sqlite3迁移mysql教程](/tutorial/sqlite2mysql.md)】 |
 
 ## 使用问题
 
@@ -194,7 +194,7 @@ services:
 
 - [x] 通过配置项设定是否允许新用户注册(1.4.7)。
 
-- [ ] 支持mysql及sqlite3迁移mysql。
+- [x] 支持mysql及sqlite3迁移mysql(1.4.8)。
 
 ## 其他相关工具
 
