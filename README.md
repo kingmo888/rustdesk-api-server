@@ -136,7 +136,7 @@ services:
 | `ALLOW_REGISTRATION` | 可选，默认 `True` | 是否允许新用户注册 |
 | 数据库配置 | -- 开始 -- | 若不使用MYSQL则以下皆无需配置 |
 | `DATABASE_TYPE` | 可选，默认 `SQLITE3` | 数据库类型(SQLITE/MYSQL) |
-| `MYSQL_DBNAME` | 可选，默认 `-` | MYSQL数据库名称 |
+| `MYSQL_DBNAME` | 可选，默认 `-` | MYSQL数据库名 |
 | `MYSQL_HOST` | 可选，默认 `127.0.0.1` | MYSQL数据库的服务器IP |
 | `MYSQL_USER` | 可选，默认 `-` | MYSQL数据库的用户名 |
 | `MYSQL_PASSWORD` | 可选，默认 `-` | MYSQL数据库的密码 |

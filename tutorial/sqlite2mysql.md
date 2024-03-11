@@ -36,11 +36,11 @@ pip install -r requirements.txt
 在文件`rustdesk_server_api/settings.py`中依次修改如下配置：
 
 - (1) `DATABASE_TYPE = os.environ.get("DATABASE_TYPE", 'SQLITE')`改为`DATABASE_TYPE = os.environ.get("DATABASE_TYPE", 'MYSQL')`
-- (2) `MYSQL_HOST = os.environ.get("MYSQL_DBNAME", '127.0.0.1')`改为`MYSQL_HOST = os.environ.get("MYSQL_HOST", '192.168.1.33')`
+- (2) `MYSQL_HOST = os.environ.get("MYSQL_HOST", '127.0.0.1')`改为`MYSQL_HOST = os.environ.get("MYSQL_HOST", '192.168.1.33')`
 - (3) `MYSQL_DBNAME = os.environ.get("MYSQL_DBNAME", '-')`改为`MYSQL_DBNAME = os.environ.get("MYSQL_DBNAME", 'rustdesk_api')`
-- (4)`MYSQL_USER = os.environ.get("MYSQL_USER", '-')`改为`MYSQL_USER = os.environ.get("MYSQL_USER", 'myuser')`
-- (5)`MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", '-')`改为`MYSQL_USER = os.environ.get("MYSQL_PASSWORD", '123456')`
-- (6)`MYSQL_PORT = os.environ.get("MYSQL_USER", '3306')`改为`MYSQL_USER = os.environ.get("MYSQL_USER", '3099')`
+- (4) `MYSQL_USER = os.environ.get("MYSQL_USER", '-')`改为`MYSQL_USER = os.environ.get("MYSQL_USER", 'myuser')`
+- (5) `MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", '-')`改为`MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", '123456')`
+- (6) `MYSQL_PORT = os.environ.get("MYSQL_PORT", '3306')`改为`MYSQL_PORT = os.environ.get("MYSQL_PORT", '3099')`
 
 5、使用命令在mysql中创建表
 
