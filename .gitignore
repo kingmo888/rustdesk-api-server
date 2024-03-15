@@ -26,3 +26,4 @@ dist_py38
 LICENSE.rst
 
 db/test_db.sqlite3
+job2en.py

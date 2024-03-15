@@ -1,0 +1,4 @@
+python manage.py makemessages -l zh_Hans -i xlwt -i django
+python manage.py makemessages -l en -i xlwt -i django
+
+python manage.py compilemessages --pythonpath E:\python_workspace\rustdesk-server-api-python\rustdesk_server_api_github\locale\zh_Hans\LC_MESSAGES

@@ -1,4 +1,5 @@
 {% load static %}
+{% load my_filters %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,7 +7,7 @@
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <title>注册_【RustDeskWeb】</title>
+    <title>{{ "注册" | translate }}_【RustDeskWeb】</title>
         <link rel="stylesheet" href="{% static 'layui/css/layui.css' %}">
         <link rel="stylesheet" href="{% static 'layui/css/style.css' %}">
     <link rel="icon" href="../frame/static/image/code.png">
@@ -14,14 +15,14 @@
 <body>
  
 <div class="login-main">
-    <header class="layui-elip" style="width: 82%">注册页</header>
+    <header class="layui-elip" style="width: 82%">{{ "注册页" | translate }}</header>
  
     <!-- 表单选项 -->
     <form class="layui-form">
         <div class="layui-input-inline">
             <!-- 用户名 -->
             <div class="layui-inline" style="width: 85%">
-                <input type="text" id="user" name="account" required  lay-verify="required" placeholder="请输入用户名" autocomplete="off" class="layui-input">
+                <input type="text" id="user" name="account" required  lay-verify="required" placeholder="{{ "请输入用户名" | translate }}" autocomplete="off" class="layui-input">
             </div>
             <!-- 对号 -->
             <div class="layui-inline">
@@ -35,7 +36,7 @@
             <!-- 密码 -->
         <div class="layui-input-inline">
             <div class="layui-inline" style="width: 85%">
-                <input type="password" id="pwd" name="password" required  lay-verify="required" placeholder="请输入密码" autocomplete="off" class="layui-input">
+                <input type="password" id="pwd" name="password" required  lay-verify="required" placeholder="{{ "请输入密码" | translate }}" autocomplete="off" class="layui-input">
             </div>
             <!-- 对号 -->
             <div class="layui-inline">
@@ -49,7 +50,7 @@
             <!-- 确认密码 -->
         <div class="layui-input-inline">
             <div class="layui-inline" style="width: 85%">
-                <input type="password" id="rpwd" name="repassword" required  lay-verify="required" placeholder="请确认密码" autocomplete="off" class="layui-input">
+                <input type="password" id="rpwd" name="repassword" required  lay-verify="required" placeholder="{{ "请确认密码" | translate }}" autocomplete="off" class="layui-input">
             </div>
             <!-- 对号 -->
             <div class="layui-inline">
@@ -63,10 +64,10 @@
  
  
         <div class="layui-input-inline login-btn" style="width: 85%">
-            <button type="submit" lay-submit lay-filter="sub" class="layui-btn">注册</button>
+            <button type="submit" lay-submit lay-filter="sub" class="layui-btn">{{ "注册" | translate }}</button>
         </div>
         <hr style="width: 85%" />
-        <p style="width: 85%"><a href="/api/user_action?action=login" class="fl">已有账号？立即登录</a></p>
+        <p style="width: 85%"><a href="/api/user_action?action=login" class="fl">{{ "已有账号？立即登录" | translate }}</a></p>
     </form>
 </div>
  
@@ -94,7 +95,7 @@
                     //layer.msg('请输入合法密码');
                     $('#pwr').removeAttr('hidden');
                     $('#pri').attr('hidden','hidden');
-                    layer.msg('请输入8~20位密码。可以包含字母、数字和特殊字符。');
+                    layer.msg('{{ "请输入8~20位密码。可以包含字母、数字和特殊字符。" | translate }}');
                 }else {
                     $('#pri').removeAttr('hidden');
                     $('#pwr').attr('hidden','hidden');
@@ -106,7 +107,7 @@
                 if($('#pwd').val() != $('#rpwd').val()){
                     $('#rpwr').removeAttr('hidden');
                     $('#rpri').attr('hidden','hidden');
-                    layer.msg('两次输入密码不一致!');
+                    layer.msg('{{ "两次输入密码不一致!" | translate }}');
                 }else {
                     $('#rpri').removeAttr('hidden');
                     $('#rpwr').attr('hidden','hidden');
@@ -126,7 +127,7 @@
                 },
                 success:function(data){
                     if (data.code == 1) {
-                        layer.msg('注册成功，请前往登录页登录。');
+                        layer.msg('{{ "注册成功，请前往登录页登录。" | translate }}');
                         ///location.href = "login.html";
                     }else {
                         layer.msg(data.msg);

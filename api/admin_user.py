@@ -5,14 +5,14 @@ from django import forms
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
 from django.contrib.auth.forms import ReadOnlyPasswordHashField
-
+from django.utils.translation import gettext as _
 
 
 class UserCreationForm(forms.ModelForm):
     """A form for creating new users. Includes all the required
     fields, plus a repeated password."""
-    password1 = forms.CharField(label='密码', widget=forms.PasswordInput)
-    password2 = forms.CharField(label='再次输入密码', widget=forms.PasswordInput)
+    password1 = forms.CharField(label=_('密码'), widget=forms.PasswordInput)
+    password2 = forms.CharField(label=_('再次输入密码'), widget=forms.PasswordInput)
 
     class Meta:
         model = models.UserProfile
@@ -23,7 +23,7 @@ class UserCreationForm(forms.ModelForm):
         password1 = self.cleaned_data.get("password1")
         password2 = self.cleaned_data.get("password2")
         if password1 and password2 and password1 != password2:
-            raise forms.ValidationError("密码校验失败，两次密码不一致。")
+            raise forms.ValidationError(_("密码校验失败，两次密码不一致。"))
         return password2
 
     
@@ -41,7 +41,7 @@ class UserChangeForm(forms.ModelForm):
     the user, but replaces the password field with admin's
     password hash display field.
     """
-    password = ReadOnlyPasswordHashField(label=("密码Hash值"), help_text=("<a href=\"../password/\">点击修改密码</a>."))
+    password = ReadOnlyPasswordHashField(label=(_("密码Hash值")), help_text=("<a href=\"../password/\">点击修改密码</a>."))
     class Meta:
         model = models.UserProfile
         fields = ('username', 'is_active', 'is_admin')
@@ -72,7 +72,7 @@ class UserAdmin(BaseUserAdmin):
     list_display = ('username', 'rid')
     list_filter = ('is_admin', 'is_active')
     fieldsets = (
-        ('基本信息', {'fields': ('username', 'password', 'is_active', 'is_admin', 'rid', 'uuid', 'deviceInfo',)}),
+        (_('基本信息'), {'fields': ('username', 'password', 'is_active', 'is_admin', 'rid', 'uuid', 'deviceInfo',)}),
       
     )
     readonly_fields = ( 'rid', 'uuid')
@@ -95,5 +95,5 @@ admin.site.register(models.RustDeskPeer, models.RustDeskPeerAdmin)
 admin.site.register(models.RustDesDevice, models.RustDesDeviceAdmin)
 admin.site.register(models.ShareLink, models.ShareLinkAdmin)
 admin.site.unregister(Group)
-admin.site.site_header = 'RustDesk自建Web'
-admin.site.site_title = '未定义'
+admin.site.site_header = _('RustDesk自建Web')
+admin.site.site_title = _('未定义')

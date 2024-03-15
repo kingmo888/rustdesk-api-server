@@ -1,20 +1,21 @@
 
 {% extends "base.html" %}{% load static %}
-{% block title %}分享机器{% endblock %}
+{% load my_filters %}
+{% block title %}{{ "分享机器" | translate }}{% endblock %}
 {% block link %}<link rel="stylesheet" href="{% static 'layui/css/style.css' %}">{% endblock %}
-{% block legend_name %}分享机器给其他用户{% endblock %}
+{% block legend_name %}{{ "分享机器给其他用户" | translate }}{% endblock %}
 {% block content %}
  
  
 <div class="layui-container">
     <div class="layui-card layui-col-md3-offset2">
-        <div class="layui-card-header">请将要分享的机器调整到右侧</div>
+        <div class="layui-card-header">{{ "请将要分享的机器调整到右侧" | translate }}</div>
         <div id="showdevice"></div>
-        <button id="create" type="button" class="layui-btn padding-5" lay-on="getData">生成分享链接</button>
+        <button id="create" type="button" class="layui-btn padding-5" lay-on="getData">{{ "生成分享链接" | translate }}</button>
     </div> 
-    <div class="layui-card">1、链接有效期为15分钟，切勿随意分享给他人。</div>
-    <div class="layui-card">2、所分享的机器，被分享人享有相同的权限，如果机器设置了保存密码，被分享人也可以直接连接。</div>
-    <div class="layui-card">3、为保障安全，链接有效期为15分钟、链接仅有效1次。链接一旦被（非分享人的登录用户）访问，分享生效，后续访问链接失效。</div>
+    <div class="layui-card">{{ "1、链接有效期为15分钟，切勿随意分享给他人。" | translate }}</div>
+    <div class="layui-card">{{ "2、所分享的机器，被分享人享有相同的权限，如果机器设置了保存密码，被分享人也可以直接连接。" | translate }}</div>
+    <div class="layui-card">{{ "3、为保障安全，链接有效期为15分钟、链接仅有效1次。链接一旦被（非分享人的登录用户）访问，分享生效，后续访问链接失效。" | translate }}</div>
     
     <div class="layui-card layui-col-md6-offset1">
           <table class="layui-table">
@@ -26,9 +27,9 @@
             </colgroup>
             <thead>
               <tr>
-                <th>链接地址</th>
-                <th>创建时间</th>
-                <th>ID列表</th>
+                <th>{{ "链接地址" | translate }}</th>
+                <th>{{ "创建时间" | translate }}</th>
+                <th>{{ "ID列表" | translate }}</th>
               </tr> 
             </thead>
             <tbody>
@@ -57,7 +58,7 @@
     //渲染
     transfer.render({
       elem: '#showdevice'  //绑定元素
-      ,title: ['我的机器', '分享机器']  //自定义标题
+      ,title: ['{{ "我的机器" | translate }}', '{{ "分享机器" | translate }}']  //自定义标题
       //,width: 500 //定义宽度
       //,height: 300 //定义高度
       ,data: [//定义数据源
@@ -90,7 +91,7 @@
                      //     time:false //取消自动关闭
                     // });  
                     //layer.msg('注册成功，请前往登录页登录。');
-                    layer.alert('成功！如需分享，请复制以下链接给其他人：<br>'+ window.location + '/' +data.shash, function (index) {
+                    layer.alert('{{ "成功！如需分享，请复制以下链接给其他人：<br>" | translate }}'+ window.location + '/' +data.shash, function (index) {
                         location.reload();});                    
                 }else {
                     layer.msg(data.msg);

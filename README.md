@@ -1,7 +1,5 @@
 # rustdesk-api-server
 
-## 如果项目有帮到你，给个star不过分吧？
-
 ## 请使用客户端最新版本1.2.3
 
 [The English explanation is available by clicking here.](https://github.com/kingmo888/rustdesk-api-server/blob/master/README_EN.md)
@@ -9,7 +7,7 @@
 <p align="center">
     <i>一个 python 实现的 Rustdesk API 接口，支持 WebUI 管理</i>
     <br/>
-    <img src ="https://img.shields.io/badge/Version-1.4.8-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/Version-1.4.9-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/Python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
     <br/>
@@ -142,6 +140,7 @@ services:
 | `MYSQL_PASSWORD` | 可选，默认 `-` | MYSQL数据库的密码 |
 | `MYSQL_PORT` | 可选，默认 `3306` | MYSQL数据库端口 |
 | 数据库配置 | -- 结束 -- | 查看【[sqlite3迁移mysql教程](/tutorial/sqlite2mysql.md)】 |
+| `LANGUAGE_CODE` | 可选，默认 `zh-hans` | 语言，支持中文(`zh-hans`)、英语(`en`) |
 
 ## 使用问题
 

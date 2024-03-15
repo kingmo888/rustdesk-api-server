@@ -1,4 +1,5 @@
 {% load static %}
+{% load i18n %}
 <!DOCTYPE html>
 <html>
 
@@ -27,19 +28,19 @@
     </script>
 
     <ul class="layui-nav">
-        <li class="layui-nav-item"><a href="/">首页</a></li>
+        <li class="layui-nav-item"><a href="/">{% trans "首页" %}</a></li>
         {% if u.is_admin %}
-        <li class="layui-nav-item"><a href="/api/work?show_type=admin">所有设备</a>
+        <li class="layui-nav-item"><a href="/api/work?show_type=admin">{% trans "所有设备" %}</a>
         </li>
         {% endif %}
-        <li class="layui-nav-item"><a href="/api/share">分享</a></li>
-        <li class="layui-nav-item"><a href="/webui" target="_blank">网页控制</a></li>
+        <li class="layui-nav-item"><a href="/api/share">{% trans "分享" %}</a></li>
+        <li class="layui-nav-item"><a href="/webui" target="_blank">{% trans "网页控制" %}</a></li>
 
         {% if u.is_admin %}
-        <li class="layui-nav-item"><a href="/admin" target="_blank">管理后台</a>
+        <li class="layui-nav-item"><a href="/admin" target="_blank">{% trans "管理后台" %}</a>
         </li>
         {% endif %}
-        <li class="layui-nav-item"><a href="/api/user_action?action=logout" target="_blank">退出</a></li>
+        <li class="layui-nav-item"><a href="/api/user_action?action=logout" target="_blank">{% trans "退出" %}</a></li>
     </ul>
 
     <fieldset class="layui-elem-field layui-field-title" style="margin-top: 20px;">

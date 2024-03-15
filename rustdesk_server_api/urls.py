@@ -25,7 +25,10 @@ else:
     from django.conf.urls import  url, include
 from django.views import static ##新增
 from django.conf import settings
+
+
 urlpatterns = [
+    path('i18n/', include('django.conf.urls.i18n')),
     path('admin/', admin.site.urls),
     url(r'^$', index),
     url(r'^api/', include('api.urls')),

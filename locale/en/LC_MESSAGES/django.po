@@ -1,0 +1,487 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2024-03-15 21:10+0800\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: .\api\admin_user.py:14 .\api\front_locale.py:28
+msgid "密码"
+msgstr "Password"
+
+#: .\api\admin_user.py:15
+msgid "再次输入密码"
+msgstr "Re-enter password"
+
+#: .\api\admin_user.py:26
+msgid "密码校验失败，两次密码不一致。"
+msgstr "Password verification failed, passwords do not match."
+
+#: .\api\admin_user.py:44
+msgid "密码Hash值"
+msgstr "Password Hash Value"
+
+#: .\api\admin_user.py:75
+msgid "基本信息"
+msgstr "Basic Information"
+
+#: .\api\admin_user.py:98
+msgid "RustDesk自建Web"
+msgstr "RustDesk Self-Hosted Web"
+
+#: .\api\admin_user.py:99
+msgid "未定义"
+msgstr "Undefined"
+
+#: .\api\front_locale.py:4 .\api\templates\base.html:40
+msgid "管理后台"
+msgstr "Admin Panel"
+
+#: .\api\front_locale.py:5
+msgid "ID列表"
+msgstr "ID List"
+
+#: .\api\front_locale.py:6
+msgid "分享机器"
+msgstr "Share Machine"
+
+#: .\api\front_locale.py:7
+msgid "这么简易的东西，忘记密码这功能就没必要了吧。"
+msgstr "For such a simple thing, the forgot password feature is unnecessary, right?"
+
+#: .\api\front_locale.py:8
+msgid "立即注册"
+msgstr "Register Now"
+
+#: .\api\front_locale.py:9
+msgid "创建时间"
+msgstr "Creation Time"
+
+#: .\api\front_locale.py:10
+msgid "注册成功，请前往登录页登录。"
+msgstr "Registration successful, please go to the login page to login."
+
+#: .\api\front_locale.py:11
+msgid "注册日期"
+msgstr "Registration Date"
+
+#: .\api\front_locale.py:12
+msgid ""
+"2、所分享的机器，被分享人享有相同的权限，如果机器设置了保存密码，被分享人也可"
+"以直接连接。"
+msgstr ""
+"2. The shared machine grants the same permissions to the recipient. If the machine is set to save password, the recipient can also connect directly."
+
+#: .\api\front_locale.py:13
+msgid "导出xlsx"
+msgstr "Export as xlsx"
+
+#: .\api\front_locale.py:14
+msgid "生成分享链接"
+msgstr "Generate Share Link"
+
+#: .\api\front_locale.py:15
+msgid "请输入8~20位密码。可以包含字母、数字和特殊字符。"
+msgstr "Please enter a password of 8~20 characters. It can contain letters, numbers, and special characters."
+
+#: .\api\front_locale.py:16
+msgid "尾页"
+msgstr "Last Page"
+
+#: .\api\front_locale.py:17
+msgid "请确认密码"
+msgstr "Please confirm password"
+
+#: .\api\front_locale.py:18
+msgid "注册"
+msgstr "Register"
+
+#: .\api\front_locale.py:19 .\api\models_work.py:73
+msgid "内存"
+msgstr "Memory"
+
+#: .\api\front_locale.py:20 .\api\templates\base.html:31
+msgid "首页"
+msgstr "Home"
+
+#: .\api\front_locale.py:21 .\api\templates\base.html:37
+msgid "网页控制"
+msgstr "Web Control"
+
+#: .\api\front_locale.py:22
+msgid "注册时间"
+msgstr "Registration Time"
+
+#: .\api\front_locale.py:23
+msgid "链接地址"
+msgstr "Link Address"
+
+#: .\api\front_locale.py:24
+msgid "请输入密码"
+msgstr "Please enter password"
+
+#: .\api\front_locale.py:25 .\api\models_work.py:50 .\api\models_work.py:76
+msgid "系统用户名"
+msgstr "System Username"
+
+#: .\api\front_locale.py:26
+msgid "状态"
+msgstr "Status"
+
+#: .\api\front_locale.py:27
+msgid "已有账号？立即登录"
+msgstr "Already have an account? Login now"
+
+#: .\api\front_locale.py:29 .\api\models_work.py:52
+msgid "别名"
+msgstr "Alias"
+
+#: .\api\front_locale.py:30
+msgid "上一页"
+msgstr "Previous Page"
+
+#: .\api\front_locale.py:31
+msgid "更新时间"
+msgstr "Update Time"
+
+#: .\api\front_locale.py:32
+msgid "综合屏"
+msgstr "Comprehensive Screen"
+
+#: .\api\front_locale.py:33 .\api\models_work.py:53
+msgid "平台"
+msgstr "Platform"
+
+#: .\api\front_locale.py:34
+msgid "全部用户"
+msgstr "All Users"
+
+#: .\api\front_locale.py:35
+msgid "注册页"
+msgstr "Registration Page"
+
+#: .\api\front_locale.py:36
+msgid "分享机器给其他用户"
+msgstr "Share machine with other users"
+
+#: .\api\front_locale.py:37 .\api\templates\base.html:33
+msgid "所有设备"
+msgstr "All Devices"
+
+#: .\api\front_locale.py:38
+msgid "连接密码"
+msgstr "Connection Password"
+
+#: .\api\front_locale.py:39
+msgid "设备统计"
+msgstr "Device Statistics"
+
+#: .\api\front_locale.py:40
+msgid "所属用户"
+msgstr "Belongs to User"
+
+#: .\api\front_locale.py:41 .\api\templates\base.html:36
+msgid "分享"
+msgstr "Share"
+
+#: .\api\front_locale.py:42
+msgid "请输入用户名"
+msgstr "Please enter username"
+
+#: .\api\front_locale.py:43
+msgid ""
+"1、链接有效期为15分钟，切勿随意分享给他人。"
+msgstr ""
+"1. The link is valid for 15 minutes. Do not share it with others casually."
+
+#: .\api\front_locale.py:44
+msgid "CPU"
+msgstr "CPU"
+
+#: .\api\front_locale.py:45 .\api\models_work.py:49 .\api\models_work.py:70
+msgid "客户端ID"
+msgstr "Client ID"
+
+#: .\api\front_locale.py:46
+msgid "下一页"
+msgstr "Next Page"
+
+#: .\api\front_locale.py:47
+msgid "登录"
+msgstr "Login"
+
+#: .\api\front_locale.py:48 .\api\templates\base.html:43
+msgid "退出"
+msgstr "Logout"
+
+#: .\api\front_locale.py:49
+msgid "请将要分享的机器调整到右侧"
+msgstr "Please adjust the machines to be shared to the right"
+
+#: .\api\front_locale.py:50
+msgid "成功！如需分享，请复制以下链接给其他人：<br>"
+msgstr "Success! If you need to share, please copy the following link to others:<br>"
+
+#: .\api\front_locale.py:51
+msgid "忘记密码？"
+msgstr "Forgot Password?"
+
+#: .\api\front_locale.py:52
+msgid "计算机名"
+msgstr "Computer Name"
+
+#: .\api\front_locale.py:53
+msgid "两次输入密码不一致!"
+msgstr "Passwords do not match!"
+
+#: .\api\front_locale.py:54
+msgid "页码"
+msgstr "Page Number"
+
+#: .\api\front_locale.py:55
+msgid "版本"
+msgstr "Version"
+
+#: .\api\front_locale.py:56 .\api\models_user.py:32 .\api\models_work.py:9
+msgid "用户名"
+msgstr "Username"
+
+#: .\api\front_locale.py:57
+msgid ""
+"3、为保障安全，链接有效期为15分钟、链接仅有效1次。链接一旦被（非分享人的登录"
+"用户）访问，分享生效，后续访问链接失效。"
+msgstr ""
+"3. For security reasons, the link is valid for 15 minutes and only valid once. Once the link is accessed by a user (other than the sharing person), the sharing becomes effective, and subsequent access to the link will be invalid."
+
+#: .\api\front_locale.py:58
+msgid "系统"
+msgstr "System"
+
+#: .\api\models_user.py:40
+msgid "登录信息:"
+msgstr "Login Information:"
+
+#: .\api\models_user.py:42
+msgid "是否激活"
+msgstr "Is Active"
+
+#: .\api\models_user.py:43
+msgid "是否管理员"
+msgstr "Is Administrator"
+
+#: .\api\models_user.py:82
+msgid "用户"
+msgstr "User"
+
+#: .\api\models_user.py:83
+msgid "用户列表"
+msgstr "User List"
+
+#: .\api\models_work.py:10
+msgid "RustDesk ID"
+msgstr "RustDesk ID"
+
+#: .\api\models_work.py:11 .\api\models_work.py:48 .\api\models_work.py:96
+msgid "用户ID"
+msgstr "User ID"
+
+#: .\api\models_work.py:12
+msgid "uuid"
+msgstr "UUID"
+
+#: .\api\models_work.py:13
+msgid "access_token"
+msgstr "Access Token"
+
+#: .\api\models_work.py:14
+msgid "登录时间"
+msgstr "Login Time"
+
+#: .\api\models_work.py:19
+msgid "Token列表"
+msgstr "Token List"
+
+#: .\api\models_work.py:30
+msgid "所属用户ID"
+msgstr "Belongs to User ID"
+
+#: .\api\models_work.py:31
+msgid "标签名称"
+msgstr "Tag Name"
+
+#: .\api\models_work.py:32
+msgid "标签颜色"
+msgstr "Tag Color"
+
+#: .\api\models_work.py:37
+msgid "Tags列表"
+msgstr "Tags List"
+
+#: .\api\models_work.py:51
+msgid "操作系统名"
+msgstr "Operating System Name"
+
+#: .\api\models_work.py:54
+msgid "标签"
+msgstr "Tag"
+
+#: .\api\models_work.py:55
+msgid "设备链接密码"
+msgstr "Device Connection Password"
+
+#: .\api\models_work.py:60
+msgid "Peers列表"
+msgstr "Peers List"
+
+#: .\api\models_work.py:72
+msgid "主机名"
+msgstr "Hostname"
+
+#: .\api\models_work.py:74
+msgid "操作系统"
+msgstr "Operating System"
+
+#: .\api\models_work.py:77
+msgid "客户端版本"
+msgstr "Client Version"
+
+#: .\api\models_work.py:78
+msgid "设备注册时间"
+msgstr "Device Registration Time"
+
+#: .\api\models_work.py:83
+msgid "设备"
+msgstr "Device"
+
+#: .\api\models_work.py:84
+msgid "设备列表"
+msgstr "Device List"
+
+#: .\api\models_work.py:97
+msgid "链接Key"
+msgstr "Link Key"
+
+#: .\api\models_work.py:98
+msgid "机器ID列表"
+msgstr "Machine ID List"
+
+#: .\api\models_work.py:99
+msgid "是否使用"
+msgstr "Is Used"
+
+#: .\api\models_work.py:100
+msgid "是否过期"
+msgstr "Is Expired"
+
+#: .\api\models_work.py:101
+msgid "生成时间"
+msgstr "Generation Time"
+
+#: .\api\models_work.py:107
+msgid "分享链接"
+msgstr "Share Link"
+
+#: .\api\models_work.py:108
+msgid "链接列表"
+msgstr "Link List"
+
+#: .\api\views_api.py:19
+msgid "请求方式错误！请使用POST方式。"
+msgstr "Request method error! Please use the POST method."
+
+#: .\api\views_api.py:33
+msgid "帐号或密码错误！请重试，多次重试后将被锁定IP！"
+msgstr "Account or password error! Please retry. After multiple retries, the IP will be locked!"
+
+#: .\api\views_api.py:71
+msgid "请求方式错误！"
+msgstr "Request method error!"
+
+#: .\api\views_api.py:79
+msgid "异常请求！"
+msgstr "Abnormal request!"
+
+#: .\api\views_api.py:92 .\api\views_api.py:212
+msgid "错误的提交方式！"
+msgstr "Incorrect submission method!"
+
+#: .\api\views_api.py:120
+msgid "拉取列表错误！"
+msgstr "Error fetching list!"
+
+#: .\api\views_api.py:199
+msgid "更新地址簿有误"
+msgstr "Error updating address book"
+
+#: .\api\views_api.py:246 .\api\views_front.py:207 .\api\views_front.py:226
+msgid "在线"
+msgstr "Online"
+
+#: .\api\views_api.py:252
+msgid "好的"
+msgstr "Okay"
+
+#: .\api\views_front.py:50
+msgid "model_to_dict接收的参数必须是模型对象"
+msgstr "The parameter received by model_to_dict must be a model object"
+
+#: .\api\views_front.py:55
+#, python-brace-format
+msgid "model_to_dict,要替换成{replace_field}字段已经存在了"
+msgstr "model_to_dict, the field to be replaced with {replace_field} already exists"
+
+#: .\api\views_front.py:60
+#, python-brace-format
+msgid "model_to_dict,要新增默认值，但字段{default_key}已经存在了"
+msgstr "model_to_dict, to add default values, but the field {default_key} already exists"
+
+#: .\api\views_front.py:134
+msgid "出了点问题，未获取用户名或密码。"
+msgstr "There was a problem, username or password not obtained."
+
+#: .\api\views_front.py:141
+msgid "帐号或密码错误！"
+msgstr "Account or password error!"
+
+#: .\api\views_front.py:153
+msgid "当前未开放注册，请联系管理员！"
+msgstr "Registration is currently not open, please contact the administrator!"
+
+#: .\api\views_front.py:160
+msgid "用户名不得小于3位"
+msgstr "Username must be at least 3 characters"
+
+#: .\api\views_front.py:165
+msgid "密码长度不符合要求, 应在8~20位。"
+msgstr "Password length does not meet requirements, should be between 8~20 characters."
+
+#: .\api\views_front.py:171
+msgid "用户名已存在。"
+msgstr "Username already exists."
+
+#: .\api\views_front.py:207 .\api\views_front.py:226
+msgid "离线"
+msgstr "Offline"
+
+#: .\api\views_front.py:210
+msgid "是"
+msgstr "Yes"
+
+#: .\api\views_front.py:210
+msgid "否"
+msgstr "No"
+
+#: .\api\views_front.py:252
+msgid "设备信息表"
+msgstr "Device Information Table"
+
+#: .\api\views_front.py:351
+msgid "数据为空。"
+msgstr "Data is empty."

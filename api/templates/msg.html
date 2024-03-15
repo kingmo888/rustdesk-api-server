@@ -1,6 +1,7 @@
 {% extends "base.html" %}
+{% load my_filters %}
 {% block title %}{{title}}{% endblock %}
-{% block legend_name %}信息{% endblock %}
+{% block legend_name %}{{ "信息" | translate }}{% endblock %}
 {% block content %} 
 <div style="padding: 20px; background-color: #F2F2F2;">
   <div class="layui-row layui-col-space15">

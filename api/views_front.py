@@ -23,6 +23,7 @@ import sys
 
 from io import BytesIO
 import xlwt
+from django.utils.translation import gettext as _
 
 salt = 'xiaomo'
 EFFECTIVE_SECONDS = 7200
@@ -46,17 +47,17 @@ def model_to_dict2(instance, fields=None, exclude=None, replace=None, default=No
     """
     # 对传递进来的模型对象校验
     if not isinstance(instance, Model):
-        raise Exception('model_to_dict接收的参数必须是模型对象')
+        raise Exception(_('model_to_dict接收的参数必须是模型对象'))
     # 对替换数据库字段名字校验
     if replace and type(replace) == dict:
         for replace_field in replace.values():
             if hasattr(instance, replace_field):
-                raise Exception(f'model_to_dict,要替换成{replace_field}字段已经存在了')
+                raise Exception(_(f'model_to_dict,要替换成{replace_field}字段已经存在了'))
     # 对要新增的默认值进行校验
     if default and type(default) == dict:
         for default_key in default.keys():
             if hasattr(instance, default_key):
-                raise Exception(f'model_to_dict,要新增默认值，但字段{default_key}已经存在了')
+                raise Exception(_(f'model_to_dict,要新增默认值，但字段{default_key}已经存在了'))
     opts = instance._meta
     data = {}
     for f in chain(opts.concrete_fields, opts.private_fields, opts.many_to_many):
@@ -130,14 +131,14 @@ def user_login(request):
     username = request.POST.get('account', '')
     password = request.POST.get('password', '')
     if not username or not password:
-        return JsonResponse({'code':0, 'msg':'出了点问题。'})
+        return JsonResponse({'code':0, 'msg':_('出了点问题，未获取用户名或密码。')})
 
     user = auth.authenticate(username=username,password=password)
     if user:
         auth.login(request, user)
         return JsonResponse({'code':1, 'url':'/api/work'})
     else:
-        return JsonResponse({'code':0, 'msg':'帐号或密码错误！'})
+        return JsonResponse({'code':0, 'msg':_('帐号或密码错误！')})
 
 def user_register(request):
     info = ''
@@ -149,25 +150,25 @@ def user_register(request):
         'msg':''
     }
     if not ALLOW_REGISTRATION:
-        result['msg'] = '当前未开放注册，请联系管理员！'
+        result['msg'] = _('当前未开放注册，请联系管理员！')
         return JsonResponse(result)
 
     username = request.POST.get('user', '')
     password1 = request.POST.get('pwd', '')
 
     if len(username) <= 3:
-        info = '用户名不得小于3位'
+        info = _('用户名不得小于3位')
         result['msg'] = info
         return JsonResponse(result)
 
     if len(password1)<8 or len(password1)>20:
-        info = '密码长度不符合要求, 应在8~20位。'
+        info = _('密码长度不符合要求, 应在8~20位。')
         result['msg'] = info
         return JsonResponse(result)
 
     user = UserProfile.objects.filter(Q(username=username)).first()
     if user:
-        info = '用户名已存在。'
+        info = _('用户名已存在。')
         result['msg'] = info
         return JsonResponse(result)
     user = UserProfile(
@@ -203,10 +204,10 @@ def get_single_info(uid):
         peers[rid]['memory'] = device.memory
         peers[rid]['cpu'] = device.cpu
         peers[rid]['os'] = device.os
-        peers[rid]['status'] = '在线' if (now-device.update_time).seconds <=120 else '离线'
+        peers[rid]['status'] = _('在线') if (now-device.update_time).seconds <=120 else _('离线')
 
     for rid in peers.keys():
-        peers[rid]['has_rhash'] = '是' if len(peers[rid]['rhash'])>1 else '否'
+        peers[rid]['has_rhash'] = _('是') if len(peers[rid]['rhash'])>1 else _('否')
 
     return [v for k,v in peers.items()]
 
@@ -222,7 +223,7 @@ def get_all_info():
             devices[peer.rid]['rust_user'] = user.username
     
     for k, v in devices.items():
-        devices[k]['status'] = '在线' if (now-datetime.datetime.strptime(v['update_time'], '%Y-%m-%d %H:%M')).seconds <=120 else '离线'
+        devices[k]['status'] = _('在线') if (now-datetime.datetime.strptime(v['update_time'], '%Y-%m-%d %H:%M')).seconds <=120 else _('离线')
     return [v for k,v in devices.items()]
 
 @login_required(login_url='/api/user_action?action=login')
@@ -248,7 +249,7 @@ def down_peers(request):
     
     all_info = get_all_info()
     f = xlwt.Workbook(encoding='utf-8')
-    sheet1 = f.add_sheet(u'设备信息表', cell_overwrite_ok=True)
+    sheet1 = f.add_sheet(_(u'设备信息表'), cell_overwrite_ok=True)
     all_fields = [x.name for x in RustDesDevice._meta.get_fields()]
     all_fields.append('rust_user')
     for i, one in enumerate(all_info):
@@ -339,13 +340,15 @@ def share(request):
 
                     msg += '已被成功获取。'
 
+            title = _(title)
+            msg = _(msg)
             return render(request, 'msg.html', {'title':msg, 'msg':msg})
     else:
         data = request.POST.get('data', '[]')
 
         data = json.loads(data)
         if not data:
-            return JsonResponse({'code':0, 'msg':'数据为空。'})
+            return JsonResponse({'code':0, 'msg':_('数据为空。')})
         rustdesk_ids = [x['title'].split('|')[0] for x in data]
         rustdesk_ids = ','.join(rustdesk_ids)
         sharelink = ShareLink(

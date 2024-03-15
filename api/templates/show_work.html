@@ -1,30 +1,31 @@
 {% extends "base.html" %}
+{% load my_filters %}
 {% block title %}RustDesk WebUI{% endblock %}
-{% block legend_name %}综合屏{% endblock %}
+{% block legend_name %}{{ "综合屏" | translate }}{% endblock %}
 {% block content %}
 <div style="padding: 20px; background-color: #F2F2F2;">
   <div class="layui-row layui-col-space15">
     {% if not show_all %}
     <div class="layui-col-md15">
       <div class="layui-card">
-        <div class="layui-card-header">设备统计 - 【用户名:{{u.username}}】</div>
+        <div class="layui-card-header">{{ "设备统计" | translate }} - 【{{ "用户名" | translate }}:{{u.username}}】</div>
         <div class="layui-card-body">
           <table class="layui-table">
             <thead>
               <tr>
-                <th>客户端ID</th>
-                <th>版本</th>
-                <th>连接密码</th>
-                <th>系统用户名</th>
-                <th>计算机名</th>
-                <th>别名</th>
-                <th>平台</th>
-                <th>系统</th>
-                <th>CPU</th>
-                <th>内存</th>
-                <th>注册时间</th>
-                <th>更新时间</th>
-                <th>状态</th>
+                <th>{{ "客户端ID" | translate }}</th>
+                <th>{{ "版本" | translate }}</th>
+                <th>{{ "连接密码" | translate }}</th>
+                <th>{{ "系统用户名" | translate }}</th>
+                <th>{{ "计算机名" | translate }}</th>
+                <th>{{ "别名" | translate }}</th>
+                <th>{{ "平台" | translate }}</th>
+                <th>{{ "系统" | translate }}</th>
+                <th>{{ "CPU" | translate }}</th>
+                <th>{{ "内存" | translate }}</th>
+                <th>{{ "注册时间" | translate }}</th>
+                <th>{{ "更新时间" | translate }}</th>
+                <th>{{ "状态" | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -53,17 +54,17 @@
     <div class="layui-col-md4 layui-col-md-offset4">
       <span class="step-links">
           {% if page_obj.has_previous %}
-              <button class="layui-btn" ><a href="?page=1">&laquo; 首页</a></button>
-              <button class="layui-btn" ><a href="?page={{ page_obj.previous_page_number }}">上一页</a></button>
+              <button class="layui-btn" ><a href="?page=1">&laquo; {{ "首页" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.previous_page_number }}">{{ "上一页" | translate }}</a></button>
           {% endif %}
           {% if page_obj.paginator.num_pages > 1 %}
           <span class="current">
-              页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+              {{ "页码" | translate }} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
           </span>
           {% endif %}
           {% if page_obj.has_next %}
-              <button class="layui-btn" > <a href="?page={{ page_obj.next_page_number }}">下一页</a></button>
-              <button class="layui-btn" ><a href="?page={{ page_obj.paginator.num_pages }}">尾页 &raquo;</a></button>
+              <button class="layui-btn" > <a href="?page={{ page_obj.next_page_number }}">{{ "下一页" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.paginator.num_pages }}">{{ "尾页" | translate }} &raquo;</a></button>
           {% endif %}
       </span>
   </div>  
@@ -73,24 +74,24 @@
     {% if u.is_admin and show_all %}
     <div class="layui-col-md15">
       <div class="layui-card">
-        <div class="layui-card-header">全部用户 &raquo;
-          <div class="layui-btn" ><a href="/api/down_peers">导出xlsx</a></div>
+        <div class="layui-card-header">{{ "全部用户" | translate }} &raquo;
+          <div class="layui-btn" ><a href="/api/down_peers">{{ "导出xlsx" | translate }}</a></div>
         </div>
         <div class="layui-card-body">
           <table class="layui-table">
             <thead>
               <tr>
-                <th>客户端ID</th>
-                <th>所属用户</th>
-                <th>版本</th>
-                <th>系统用户名</th>
-                <th>计算机名</th>
-                <th>系统</th>
-                <th>CPU</th>
-                <th>内存</th>
-                <th>注册日期</th>
-                <th>更新时间</th>
-                <th>状态</th>
+                <th>{{ "客户端ID" | translate }}</th>
+                <th>{{ "所属用户" | translate }}</th>
+                <th>{{ "版本" | translate }}</th>
+                <th>{{ "系统用户名" | translate }}</th>
+                <th>{{ "计算机名" | translate }}</th>
+                <th>{{ "系统" | translate }}</th>
+                <th>{{ "CPU" | translate }}</th>
+                <th>{{ "内存" | translate }}</th>
+                <th>{{ "注册日期" | translate }}</th>
+                <th>{{ "更新时间" | translate }}</th>
+                <th>{{ "状态" | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -118,17 +119,17 @@
     <div class="layui-col-md4 layui-col-md-offset4">
       <span class="step-links">
           {% if page_obj.has_previous %}
-              <button class="layui-btn" ><a href="?show_type=admin&page=1">&laquo; 首页</a></button>
-              <button class="layui-btn" ><a href="?show_type=admin&page={{ page_obj.previous_page_number }}">上一页</a></button>
+              <button class="layui-btn" ><a href="?show_type=admin&page=1">&laquo; {{ "首页" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?show_type=admin&page={{ page_obj.previous_page_number }}">{{ "上一页" | translate }}</a></button>
           {% endif %}
           {% if page_obj.paginator.num_pages > 1 %}
           <span class="current">
-              页码 {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+              {{ "页码" | translate }} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
           </span>
           {% endif %}
           {% if page_obj.has_next %}
-              <button class="layui-btn" > <a href="?show_type=admin&page={{ page_obj.next_page_number }}">下一页</a></button>
-              <button class="layui-btn" ><a href="?show_type=admin&page={{ page_obj.paginator.num_pages }}">尾页 &raquo;</a></button>
+              <button class="layui-btn" > <a href="?show_type=admin&page={{ page_obj.next_page_number }}">{{ "下一页" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?show_type=admin&page={{ page_obj.paginator.num_pages }}">{{ "尾页" | translate }} &raquo;</a></button>
           {% endif %}
       </span>
   </div>  
