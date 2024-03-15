@@ -99,7 +99,7 @@ DATABASES = {
         'NAME': BASE_DIR / 'db/db.sqlite3',
     }
 }
-if DATABASE_TYPE == 'MYSQL' and MYSQL_DBNAME!='-' and USER!= '-' and PASSWORD!='-':
+if DATABASE_TYPE == 'MYSQL' and MYSQL_DBNAME!='-' and MYSQL_USER!= '-' and MYSQL_PASSWORD!='-':
     # 简单通过数据库名、账密信息过滤下，防止用户未配置mysql却使用mysql
     DATABASES = {
     'default': {
