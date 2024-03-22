@@ -1,5 +1,5 @@
 name: Bug Report
-description: File a bug report.Failure to respond within 3 days after receiving a response will result in closure.(反馈bug，得到答复后3日未回复将被关闭)
+description: Submit an error report. Failure to respond within 3 days after receiving a response will result in closure. Attention! Asking questions without starting is very unethical.(提交错误报告。在收到回复后3天内未做出回复将导致关闭。注意！不star却提问是很没有道德的。)
 title: "[Bug]: "
 labels: ["bug"]
 
