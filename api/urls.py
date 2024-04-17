@@ -21,4 +21,7 @@ urlpatterns = [
     url(r'^work',views.work),                # 前端
     url(r'^down_peers$',views.down_peers),   # 前端
     url(r'^share',views.share),              # 前端
+    url(r'^conn_log',views.conn_log),
+    url(r'^file_log',views.file_log),
+    url(r'^audit',views.audit),
     ]

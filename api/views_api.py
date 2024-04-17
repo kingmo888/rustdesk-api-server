@@ -4,9 +4,10 @@ import json
 import time
 import datetime
 import hashlib
+import math
 from django.contrib import auth
 from django.forms.models import model_to_dict
-from api.models import RustDeskToken, UserProfile, RustDeskTag, RustDeskPeer, RustDesDevice
+from api.models import RustDeskToken, UserProfile, RustDeskTag, RustDeskPeer, RustDesDevice, ConnLog, FileLog
 from django.db.models import Q
 import copy
 from .views_front import *
@@ -245,6 +246,61 @@ def heartbeat(request):
     result = {}
     result['data'] = _('在线')
     return JsonResponse(result)
+
+def audit(request):
+    postdata = json.loads(request.body)
+    #print(postdata)
+    audit_type = postdata['action'] if 'action' in postdata else ''
+    if audit_type == 'new':
+        new_conn_log = ConnLog(
+            action=postdata['action'] if 'action' in postdata else '',
+            conn_id=postdata['conn_id'] if 'conn_id' in postdata else 0,
+            from_ip=postdata['ip'] if 'ip' in postdata else '',
+            from_id='',
+            rid=postdata['id'] if 'id' in postdata else '',
+            conn_start=datetime.datetime.now(),
+            session_id=postdata['session_id'] if 'session_id' in postdata else 0,
+            uuid=postdata['uuid'] if 'uuid' in postdata else '',
+        )
+        new_conn_log.save()
+    elif audit_type =="close":
+        ConnLog.objects.filter(Q(conn_id=postdata['conn_id'])).update(conn_end=datetime.datetime.now())
+    elif 'is_file' in postdata:
+        print(postdata)
+        files = json.loads(postdata['info'])['files']
+        filesize = convert_filesize(int(files[0][1]))
+        new_file_log = FileLog(
+            file=postdata['path'],
+            user_id=postdata['peer_id'],
+            user_ip=json.loads(postdata['info'])['ip'],
+            remote_id=postdata['id'],
+            filesize=filesize,
+            direction=postdata['type'],
+            logged_at=datetime.datetime.now(),
+        )
+        new_file_log.save()
+    else:
+        try:
+            peer = postdata['peer']
+            ConnLog.objects.filter(Q(conn_id=postdata['conn_id'])).update(session_id=postdata['session_id'])
+            ConnLog.objects.filter(Q(conn_id=postdata['conn_id'])).update(from_id=peer[0])
+        except:
+            print(postdata)
+
+    result = {
+    'code':1,
+    'data':'ok'
+    }
+    return JsonResponse(result)
+
+def convert_filesize(size_bytes):
+    if size_bytes == 0:
+        return "0B"
+    size_name = ("B", "KB", "MB", "GB", "TB", "PB", "EB", "ZB", "YB")
+    i = int(math.floor(math.log(size_bytes, 1024)))
+    p = math.pow(1024, i)
+    s = round(size_bytes / p, 2)
+    return "%s %s" % (s, size_name[i])
     
 def users(request):
     result = {
