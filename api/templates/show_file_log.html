@@ -5,20 +5,20 @@
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md15">
       <div class="layui-card">
-        <div class="layui-card-header">{{ "File Transfer Log" }}:【{{u.username}}】</div>
+        <div class="layui-card-header">{{ "File Transfer Log" | translate }}:【{{u.username}}】</div>
         <div class="layui-card-body">
           <table class="layui-table">
             <thead>
               <tr>
-                <th>File</th>
-                <th>Remote ID</th>
-                <th>Remote Alias</th>
-                <th>User ID</th>
-                <th>User Alias</th>
-                <th>User IP</th>
-                <th>Filesize</th>
-                <th>Sent/Received</th>
-                <th>Logged At</th>
+                <th>{{ "File" | translate }}</th>
+                <th>{{ "Remote ID" | translate }}</th>
+                <th>{{ "Remote Alias" | translate }}</th>
+                <th>{{ "User ID" | translate }}</th>
+                <th>{{ "User Alias" | translate }}</th>
+                <th>{{ "User IP" | translate }}</th>
+                <th>{{ "Filesize" | translate }}</th>
+                <th>{{ "Sent/Received" | translate }}</th>
+                <th>{{ "Logged At" | translate }}</th>
               </tr>
             </thead>
             <tbody>
@@ -47,17 +47,17 @@
     <div class="layui-col-md4 layui-col-md-offset4">
       <span class="step-links">
           {% if page_obj.has_previous %}
-              <button class="layui-btn" ><a href="?page=1">&laquo; {{ "First" }}</a></button>
-              <button class="layui-btn" ><a href="?page={{ page_obj.previous_page_number }}">{{ "Previous" }}</a></button>
+              <button class="layui-btn" ><a href="?page=1">&laquo; {{ "First" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.previous_page_number }}">{{ "Previous" | translate }}</a></button>
           {% endif %}
           {% if page_obj.paginator.num_pages > 1 %}
           <span class="current">
-              {{ "page #" }} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+              {{ "page #" | translate }} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
           </span>
           {% endif %}
           {% if page_obj.has_next %}
-              <button class="layui-btn" > <a href="?page={{ page_obj.next_page_number }}">{{ "Next" }}</a></button>
-              <button class="layui-btn" ><a href="?page={{ page_obj.paginator.num_pages }}">{{ "Last"  }} &raquo;</a></button>
+              <button class="layui-btn" > <a href="?page={{ page_obj.next_page_number }}">{{ "Next" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.paginator.num_pages }}">{{ "Last" | translate  }} &raquo;</a></button>
           {% endif %}
       </span>
   </div>  

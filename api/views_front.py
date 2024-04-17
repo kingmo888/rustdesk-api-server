@@ -370,12 +370,12 @@ def get_conn_log():
             peer = RustDeskPeer.objects.get(rid=v['rid'])
             logs[k]['alias'] = peer.alias
         except:
-            logs[k]['alias'] = 'UNKNOWN'
+            logs[k]['alias'] = _('UNKNOWN')
         try:
             peer = RustDeskPeer.objects.get(rid=v['from_id'])
             logs[k]['from_alias'] = peer.alias
         except:
-            logs[k]['from_alias'] = 'UNKNOWN'
+            logs[k]['from_alias'] = _('UNKNOWN')
         #from_zone = tz.tzutc()
         #to_zone = tz.tzlocal()
         #utc = logs[k]['logged_at']
@@ -406,12 +406,12 @@ def get_file_log():
             peer_remote = RustDeskPeer.objects.get(rid=v['remote_id'])
             logs[k]['remote_alias'] = peer_remote.alias
         except:
-            logs[k]['remote_alias'] = 'UNKNOWN'
+            logs[k]['remote_alias'] = _('UNKNOWN')
         try:
             peer_user = RustDeskPeer.objects.get(rid=v['user_id'])
             logs[k]['user_alias'] = peer_user.alias
         except:
-            logs[k]['user_alias'] = 'UNKNOWN'
+            logs[k]['user_alias'] = _('UNKNOWN')
 
     sorted_logs = sorted(logs.items(), key=lambda x: x[1]['logged_at'], reverse=True)
     new_ordered_dict = {}
