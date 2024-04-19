@@ -6,7 +6,7 @@ from django.http import JsonResponse
 from django.db.models import Q
 from django.contrib.auth.decorators import login_required
 from django.contrib import auth
-from api.models import RustDeskPeer, RustDesDevice, UserProfile, ShareLink
+from api.models import RustDeskPeer, RustDesDevice, UserProfile, ShareLink, ConnLog, FileLog
 from django.forms.models import model_to_dict
 from django.core.paginator import Paginator
 from django.http import HttpResponse
@@ -360,3 +360,76 @@ def share(request):
 
         return JsonResponse({'code':1, 'shash':sharelink.shash})
 
+
+def get_conn_log():
+    logs = ConnLog.objects.all()
+    logs = {x.id:model_to_dict(x) for x in logs}
+
+    for k, v in logs.items():
+        try:
+            peer = RustDeskPeer.objects.get(rid=v['rid'])
+            logs[k]['alias'] = peer.alias
+        except:
+            logs[k]['alias'] = _('UNKNOWN')
+        try:
+            peer = RustDeskPeer.objects.get(rid=v['from_id'])
+            logs[k]['from_alias'] = peer.alias
+        except:
+            logs[k]['from_alias'] = _('UNKNOWN')
+        #from_zone = tz.tzutc()
+        #to_zone = tz.tzlocal()
+        #utc = logs[k]['logged_at']
+        #utc = utc.replace(tzinfo=from_zone)
+        #logs[k]['logged_at'] = utc.astimezone(to_zone)
+        try:
+            duration = round((logs[k]['conn_end'] - logs[k]['conn_start']).total_seconds())
+            m, s = divmod(duration, 60)
+            h, m = divmod(m, 60)
+            #d, h = divmod(h, 24)
+            logs[k]['duration'] = f'{h:02d}:{m:02d}:{s:02d}'
+        except:
+            logs[k]['duration'] = -1
+
+    sorted_logs = sorted(logs.items(), key=lambda x: x[1]['conn_start'], reverse=True)
+    new_ordered_dict = {}
+    for key, alog in sorted_logs:
+        new_ordered_dict[key] = alog
+
+    return [v for k, v in new_ordered_dict.items()]
+
+def get_file_log():
+    logs = FileLog.objects.all()
+    logs = {x.id:model_to_dict(x) for x in logs}
+
+    for k, v in logs.items():
+        try:
+            peer_remote = RustDeskPeer.objects.get(rid=v['remote_id'])
+            logs[k]['remote_alias'] = peer_remote.alias
+        except:
+            logs[k]['remote_alias'] = _('UNKNOWN')
+        try:
+            peer_user = RustDeskPeer.objects.get(rid=v['user_id'])
+            logs[k]['user_alias'] = peer_user.alias
+        except:
+            logs[k]['user_alias'] = _('UNKNOWN')
+
+    sorted_logs = sorted(logs.items(), key=lambda x: x[1]['logged_at'], reverse=True)
+    new_ordered_dict = {}
+    for key, alog in sorted_logs:
+        new_ordered_dict[key] = alog
+
+    return [v for k, v in new_ordered_dict.items()]
+
+@login_required(login_url='/api/user_action?action=login')
+def conn_log(request):
+    paginator = Paginator(get_conn_log(), 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'show_conn_log.html', {'page_obj':page_obj})
+
+@login_required(login_url='/api/user_action?action=login')
+def file_log(request):
+    paginator = Paginator(get_file_log(), 20)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    return render(request, 'show_file_log.html', {'page_obj':page_obj})

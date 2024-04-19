@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}RustDesk WebUI{% endblock %}
+{% block content %}
+<div style="padding: 20px; background-color: #F2F2F2;">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md15">
+      <div class="layui-card">
+        <div class="layui-card-header">{{ "Connection Log" | translate }}:【{{u.username}}】</div>
+        <div class="layui-card-body">
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <th>{{ "User IP" | translate }}</th>
+                <th>{{ "User ID" | translate }}</th>
+                <th>{{ "User Alias" | translate }}</th>
+                <th>{{ "Remote ID" | translate }}</th>
+                <th>{{ "Remote Alias" | translate }}</th>
+                <th>{{ "Connection Start Time" | translate }}</th>
+                <th>{{ "Connection End Time" | translate }}</th>
+                <th>{{ "Duration (HH:MM:SS)" | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for one in page_obj %}
+              <tr>
+                <td>{{one.from_ip}} </td>
+                <td>{{one.from_id}}</td>
+                <td>{{one.from_alias}}</td>
+                <td>{{one.rid}}</td>  
+                <td>{{one.alias}}</td> 
+                <td>{{one.conn_start}}</td>
+                <td>{{one.conn_end}}</td>
+                <td>{{one.duration}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md4 layui-col-md-offset4">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <button class="layui-btn" ><a href="?page=1">&laquo; {{ "First" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.previous_page_number }}">{{ "Previous" | translate }}</a></button>
+          {% endif %}
+          {% if page_obj.paginator.num_pages > 1 %}
+          <span class="current">
+              {{ "Page #" | translate }} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+          </span>
+          {% endif %}
+          {% if page_obj.has_next %}
+              <button class="layui-btn" > <a href="?page={{ page_obj.next_page_number }}">{{ "Next" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.paginator.num_pages }}">{{ "Last" | translate }} &raquo;</a></button>
+          {% endif %}
+      </span>
+  </div>  
+  </div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}RustDesk WebUI{% endblock %}
+{% block content %}
+<div style="padding: 20px; background-color: #F2F2F2;">
+  <div class="layui-row layui-col-space15">
+    <div class="layui-col-md15">
+      <div class="layui-card">
+        <div class="layui-card-header">{{ "File Transfer Log" | translate }}:【{{u.username}}】</div>
+        <div class="layui-card-body">
+          <table class="layui-table">
+            <thead>
+              <tr>
+                <th>{{ "File" | translate }}</th>
+                <th>{{ "Remote ID" | translate }}</th>
+                <th>{{ "Remote Alias" | translate }}</th>
+                <th>{{ "User ID" | translate }}</th>
+                <th>{{ "User Alias" | translate }}</th>
+                <th>{{ "User IP" | translate }}</th>
+                <th>{{ "Filesize" | translate }}</th>
+                <th>{{ "Sent/Received" | translate }}</th>
+                <th>{{ "Logged At" | translate }}</th>
+              </tr>
+            </thead>
+            <tbody>
+              {% for one in page_obj %}
+              <tr>
+                <td>{{one.file}}</td>
+                <td>{{one.remote_id}} </td>
+                <td>{{one.remote_alias}}</td>
+                <td>{{one.user_id}}</td>
+                <td>{{one.user_alias}}</td>
+                <td>{{one.user_ip}}</td>
+                <td>{{one.filesize}}</td>
+                {% if one.direction == 0 %}
+                <td>User Received File</td>
+                {% else %}
+                <td>User Sent File</td>
+                {% endif %}
+                <td>{{one.logged_at}}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="layui-col-md4 layui-col-md-offset4">
+      <span class="step-links">
+          {% if page_obj.has_previous %}
+              <button class="layui-btn" ><a href="?page=1">&laquo; {{ "First" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.previous_page_number }}">{{ "Previous" | translate }}</a></button>
+          {% endif %}
+          {% if page_obj.paginator.num_pages > 1 %}
+          <span class="current">
+              {{ "page #" | translate }} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+          </span>
+          {% endif %}
+          {% if page_obj.has_next %}
+              <button class="layui-btn" > <a href="?page={{ page_obj.next_page_number }}">{{ "Next" | translate }}</a></button>
+              <button class="layui-btn" ><a href="?page={{ page_obj.paginator.num_pages }}">{{ "Last" | translate  }} &raquo;</a></button>
+          {% endif %}
+      </span>
+  </div>  
+  </div>
+</div>
+
+{% endblock %}
