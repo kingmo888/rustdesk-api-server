@@ -15,7 +15,7 @@
     <img src ="https://img.shields.io/badge/Docker-arm|arm64|amd64-blue.svg" />
 </p>
 
-![主页面](images/front_main.png)
+![主页面](images/front_main.png) 
 
 ## 功能特点
 
