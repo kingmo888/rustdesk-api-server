@@ -9,7 +9,7 @@
 <p align="center">
     <i>A Rustdesk API interface implemented in Python, with WebUI management support</i>
     <br/>
-    <img src ="https://img.shields.io/badge/Version-1.4.8-blueviolet.svg"/>
+    <img src ="https://img.shields.io/badge/Version-1.5.0-blueviolet.svg"/>
     <img src ="https://img.shields.io/badge/Python-3.7|3.8|3.9|3.10|3.11-blue.svg" />
     <img src ="https://img.shields.io/badge/Django-3.2+|4.x-yelow.svg" />
     <br/>
