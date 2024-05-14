@@ -44,6 +44,7 @@ MYSQL_PORT = os.environ.get("MYSQL_PORT", '3306')
 #==========数据库配置 结束=====================
 
 LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", 'zh-hans')
+##LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", 'en')
 
 # Application definition
 

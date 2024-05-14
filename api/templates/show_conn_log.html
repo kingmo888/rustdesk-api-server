@@ -1,23 +1,24 @@
 {% extends "base.html" %}
+{% load my_filters %}
 {% block title %}RustDesk WebUI{% endblock %}
 {% block content %}
 <div style="padding: 20px; background-color: #F2F2F2;">
   <div class="layui-row layui-col-space15">
     <div class="layui-col-md15">
       <div class="layui-card">
-        <div class="layui-card-header">{{ "Connection Log" | translate }}:【{{u.username}}】</div>
+        <div class="layui-card-header">{{ "连接日志" | translate }}:【{{u.username}}】</div>
         <div class="layui-card-body">
           <table class="layui-table">
             <thead>
               <tr>
-                <th>{{ "User IP" | translate }}</th>
-                <th>{{ "User ID" | translate }}</th>
-                <th>{{ "User Alias" | translate }}</th>
-                <th>{{ "Remote ID" | translate }}</th>
-                <th>{{ "Remote Alias" | translate }}</th>
-                <th>{{ "Connection Start Time" | translate }}</th>
-                <th>{{ "Connection End Time" | translate }}</th>
-                <th>{{ "Duration (HH:MM:SS)" | translate }}</th>
+                <th>{{ "用户IP" | translate }}</th>
+                <th>{{ "用户ID" | translate }}</th>
+                <th>{{ "用户别名" | translate }}</th>
+                <th>{{ "远程ID" | translate }}</th>
+                <th>{{ "远程别名" | translate }}</th>
+                <th>{{ "连接开始时间" | translate }}</th>
+                <th>{{ "连接结束时间" | translate }}</th>
+                <th>{{ "时长"  | translate }}(HH:MM:SS)</th>
               </tr>
             </thead>
             <tbody>
@@ -46,7 +47,7 @@
           {% endif %}
           {% if page_obj.paginator.num_pages > 1 %}
           <span class="current">
-              {{ "Page #" | translate }} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
+              {{ "页码 #" | translate }} {{ page_obj.number }} / {{ page_obj.paginator.num_pages }}
           </span>
           {% endif %}
           {% if page_obj.has_next %}

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2024-03-15 21:10+0800\n"
+"POT-Creation-Date: 2024-05-14 10:44+0800\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -32,15 +32,15 @@ msgstr "Password Hash Value"
 msgid "基本信息"
 msgstr "Basic Information"
 
-#: .\api\admin_user.py:98
+#: .\api\admin_user.py:100
 msgid "RustDesk自建Web"
 msgstr "RustDesk Self-Hosted Web"
 
-#: .\api\admin_user.py:99
+#: .\api\admin_user.py:101
 msgid "未定义"
 msgstr "Undefined"
 
-#: .\api\front_locale.py:4 .\api\templates\base.html:40
+#: .\api\front_locale.py:4 .\api\templates\base.html:42
 msgid "管理后台"
 msgstr "Admin Panel"
 
@@ -54,7 +54,8 @@ msgstr "Share Machine"
 
 #: .\api\front_locale.py:7
 msgid "这么简易的东西，忘记密码这功能就没必要了吧。"
-msgstr "For such a simple thing, the forgot password feature is unnecessary, right?"
+msgstr ""
+"For such a simple thing, the forgot password feature is unnecessary, right?"
 
 #: .\api\front_locale.py:8
 msgid "立即注册"
@@ -77,7 +78,8 @@ msgid ""
 "2、所分享的机器，被分享人享有相同的权限，如果机器设置了保存密码，被分享人也可"
 "以直接连接。"
 msgstr ""
-"2. The shared machine grants the same permissions to the recipient. If the machine is set to save password, the recipient can also connect directly."
+"2. The shared machine grants the same permissions to the recipient. If the "
+"machine is set to save password, the recipient can also connect directly."
 
 #: .\api\front_locale.py:13
 msgid "导出xlsx"
@@ -89,7 +91,9 @@ msgstr "Generate Share Link"
 
 #: .\api\front_locale.py:15
 msgid "请输入8~20位密码。可以包含字母、数字和特殊字符。"
-msgstr "Please enter a password of 8~20 characters. It can contain letters, numbers, and special characters."
+msgstr ""
+"Please enter a password of 8~20 characters. It can contain letters, numbers, "
+"and special characters."
 
 #: .\api\front_locale.py:16
 msgid "尾页"
@@ -196,8 +200,7 @@ msgid "请输入用户名"
 msgstr "Please enter username"
 
 #: .\api\front_locale.py:43
-msgid ""
-"1、链接有效期为15分钟，切勿随意分享给他人。"
+msgid "1、链接有效期为15分钟，切勿随意分享给他人。"
 msgstr ""
 "1. The link is valid for 15 minutes. Do not share it with others casually."
 
@@ -217,7 +220,7 @@ msgstr "Next Page"
 msgid "登录"
 msgstr "Login"
 
-#: .\api\front_locale.py:48 .\api\templates\base.html:43
+#: .\api\front_locale.py:48 .\api\templates\base.html:45
 msgid "退出"
 msgstr "Logout"
 
@@ -227,7 +230,8 @@ msgstr "Please adjust the machines to be shared to the right"
 
 #: .\api\front_locale.py:50
 msgid "成功！如需分享，请复制以下链接给其他人：<br>"
-msgstr "Success! If you need to share, please copy the following link to others:<br>"
+msgstr ""
+"Success! If you need to share, please copy the following link to others:<br>"
 
 #: .\api\front_locale.py:51
 msgid "忘记密码？"
@@ -258,11 +262,101 @@ msgid ""
 "3、为保障安全，链接有效期为15分钟、链接仅有效1次。链接一旦被（非分享人的登录"
 "用户）访问，分享生效，后续访问链接失效。"
 msgstr ""
-"3. For security reasons, the link is valid for 15 minutes and only valid once. Once the link is accessed by a user (other than the sharing person), the sharing becomes effective, and subsequent access to the link will be invalid."
+"3. For security reasons, the link is valid for 15 minutes and only valid "
+"once. Once the link is accessed by a user (other than the sharing person), "
+"the sharing becomes effective, and subsequent access to the link will be "
+"invalid."
 
 #: .\api\front_locale.py:58
 msgid "系统"
 msgstr "System"
+
+#: .\api\front_locale.py:59
+msgid "我的机器"
+msgstr "My Machine"
+
+#: .\api\front_locale.py:60
+#, fuzzy
+#| msgid "基本信息"
+msgid "信息"
+msgstr "Basic Information"
+
+#: .\api\front_locale.py:61
+msgid "远程ID"
+msgstr "Remote ID"
+
+#: .\api\front_locale.py:62
+msgid "远程别名"
+msgstr "Remote Alias"
+
+#: .\api\front_locale.py:63 .\api\models_work.py:11 .\api\models_work.py:48
+#: .\api\models_work.py:126
+msgid "用户ID"
+msgstr "User ID"
+
+#: .\api\front_locale.py:64
+msgid "用户别名"
+msgstr "User Alias"
+
+#: .\api\front_locale.py:65
+msgid "用户IP"
+msgstr "User IP"
+
+#: .\api\front_locale.py:66
+msgid "文件大小"
+msgstr "Filesize"
+
+#: .\api\front_locale.py:67
+msgid "发送/接受"
+msgstr "Sent/Received"
+
+#: .\api\front_locale.py:68
+msgid "记录于"
+msgstr "Logged At"
+
+#: .\api\front_locale.py:69
+msgid "连接开始时间"
+msgstr "Connection Start Time\t"
+
+#: .\api\front_locale.py:70
+msgid "连接结束时间"
+msgstr "Connection End Time"
+
+#: .\api\front_locale.py:71
+msgid "时长"
+msgstr "Duration"
+
+#: .\api\front_locale.py:72 .\api\templates\base.html:40
+msgid "连接日志"
+msgstr "Connection Log"
+
+#: .\api\front_locale.py:73 .\api\templates\base.html:41
+msgid "文件传输日志"
+msgstr "File Transfer Log"
+
+#: .\api\front_locale.py:74
+msgid "页码 #"
+msgstr "Page #"
+
+#: .\api\front_locale.py:75
+msgid "下一页 #"
+msgstr "Next #"
+
+#: .\api\front_locale.py:76
+msgid "上一页 #"
+msgstr "Previous #"
+
+#: .\api\front_locale.py:77
+#, fuzzy
+#| msgid "上一页"
+msgid "第一页"
+msgstr "First"
+
+#: .\api\front_locale.py:78
+#, fuzzy
+#| msgid "上一页"
+msgid "上页"
+msgstr "Previous Page"
 
 #: .\api\models_user.py:40
 msgid "登录信息:"
@@ -287,10 +381,6 @@ msgstr "User List"
 #: .\api\models_work.py:10
 msgid "RustDesk ID"
 msgstr "RustDesk ID"
-
-#: .\api\models_work.py:11 .\api\models_work.py:48 .\api\models_work.py:96
-msgid "用户ID"
-msgstr "User ID"
 
 #: .\api\models_work.py:12
 msgid "uuid"
@@ -364,67 +454,69 @@ msgstr "Device"
 msgid "设备列表"
 msgstr "Device List"
 
-#: .\api\models_work.py:97
+#: .\api\models_work.py:127
 msgid "链接Key"
 msgstr "Link Key"
 
-#: .\api\models_work.py:98
+#: .\api\models_work.py:128
 msgid "机器ID列表"
 msgstr "Machine ID List"
 
-#: .\api\models_work.py:99
+#: .\api\models_work.py:129
 msgid "是否使用"
 msgstr "Is Used"
 
-#: .\api\models_work.py:100
+#: .\api\models_work.py:130
 msgid "是否过期"
 msgstr "Is Expired"
 
-#: .\api\models_work.py:101
+#: .\api\models_work.py:131
 msgid "生成时间"
 msgstr "Generation Time"
 
-#: .\api\models_work.py:107
+#: .\api\models_work.py:137
 msgid "分享链接"
 msgstr "Share Link"
 
-#: .\api\models_work.py:108
+#: .\api\models_work.py:138
 msgid "链接列表"
 msgstr "Link List"
 
-#: .\api\views_api.py:19
+#: .\api\views_api.py:20
 msgid "请求方式错误！请使用POST方式。"
 msgstr "Request method error! Please use the POST method."
 
-#: .\api\views_api.py:33
+#: .\api\views_api.py:34
 msgid "帐号或密码错误！请重试，多次重试后将被锁定IP！"
-msgstr "Account or password error! Please retry. After multiple retries, the IP will be locked!"
+msgstr ""
+"Account or password error! Please retry. After multiple retries, the IP will "
+"be locked!"
 
-#: .\api\views_api.py:71
+#: .\api\views_api.py:72
 msgid "请求方式错误！"
 msgstr "Request method error!"
 
-#: .\api\views_api.py:79
+#: .\api\views_api.py:80
 msgid "异常请求！"
 msgstr "Abnormal request!"
 
-#: .\api\views_api.py:92 .\api\views_api.py:212
+#: .\api\views_api.py:93 .\api\views_api.py:213
 msgid "错误的提交方式！"
 msgstr "Incorrect submission method!"
 
-#: .\api\views_api.py:120
+#: .\api\views_api.py:121
 msgid "拉取列表错误！"
 msgstr "Error fetching list!"
 
-#: .\api\views_api.py:199
+#: .\api\views_api.py:200
 msgid "更新地址簿有误"
 msgstr "Error updating address book"
 
-#: .\api\views_api.py:246 .\api\views_front.py:207 .\api\views_front.py:226
+#: .\api\views_api.py:247 .\api\views_front.py:207 .\api\views_front.py:226
 msgid "在线"
 msgstr "Online"
 
-#: .\api\views_api.py:252
+#: .\api\views_api.py:308
 msgid "好的"
 msgstr "Okay"
 
@@ -435,12 +527,15 @@ msgstr "The parameter received by model_to_dict must be a model object"
 #: .\api\views_front.py:55
 #, python-brace-format
 msgid "model_to_dict,要替换成{replace_field}字段已经存在了"
-msgstr "model_to_dict, the field to be replaced with {replace_field} already exists"
+msgstr ""
+"model_to_dict, the field to be replaced with {replace_field} already exists"
 
 #: .\api\views_front.py:60
 #, python-brace-format
 msgid "model_to_dict,要新增默认值，但字段{default_key}已经存在了"
-msgstr "model_to_dict, to add default values, but the field {default_key} already exists"
+msgstr ""
+"model_to_dict, to add default values, but the field {default_key} already "
+"exists"
 
 #: .\api\views_front.py:134
 msgid "出了点问题，未获取用户名或密码。"
@@ -460,7 +555,9 @@ msgstr "Username must be at least 3 characters"
 
 #: .\api\views_front.py:165
 msgid "密码长度不符合要求, 应在8~20位。"
-msgstr "Password length does not meet requirements, should be between 8~20 characters."
+msgstr ""
+"Password length does not meet requirements, should be between 8~20 "
+"characters."
 
 #: .\api\views_front.py:171
 msgid "用户名已存在。"
@@ -485,3 +582,11 @@ msgstr "Device Information Table"
 #: .\api\views_front.py:351
 msgid "数据为空。"
 msgstr "Data is empty."
+
+#: .\api\views_front.py:373 .\api\views_front.py:378 .\api\views_front.py:409
+#: .\api\views_front.py:414
+msgid "UNKNOWN"
+msgstr ""
+
+#~ msgid "未知"
+#~ msgstr "UNKNOWN"
