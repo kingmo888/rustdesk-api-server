@@ -169,6 +169,10 @@ services:
 - 后台操作登录或登出时：CSRF验证失败. 请求被中断.
 
   这种操作大概率是docker配置+nginx反代+SSL的组合，要注意修改CSRF_TRUSTED_ORIGINS，如果是ssl那就是https开头，否则就是http。
+  
+- Mysql版本要求
+
+  如果你使用的是Mysql数据库，需要注意django4.x版本需要Mysql8.0，如果要使用mysql5.8则需要将django版本降至3.2。
 
 ## 开发计划
 
