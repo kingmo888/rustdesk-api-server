@@ -30,21 +30,23 @@ ID_SERVER = os.environ.get("ID_SERVER", '')
 DEBUG = os.environ.get("DEBUG", False)
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 ALLOWED_HOSTS = ["*"]
-AUTH_USER_MODEL = 'api.UserProfile'      #AppName.自定义user
+AUTH_USER_MODEL = 'api.UserProfile'      # AppName.自定义user
 
-ALLOW_REGISTRATION = os.environ.get("ALLOW_REGISTRATION", "True") or os.environ.get("ALLOW_REGISTRATION", "True") == "True"               # 是否允许注册, True为允许，False为不允许
+ALLOW_REGISTRATION = os.environ.get("ALLOW_REGISTRATION", "True")          # 是否允许注册, True为允许，False为不允许
+ALLOW_REGISTRATION = True if ALLOW_REGISTRATION.lower() == 'true' else False
 
-#==========数据库配置 开始=====================
+
+# ==========数据库配置 开始=====================
 DATABASE_TYPE = os.environ.get("DATABASE_TYPE", 'SQLITE')
 MYSQL_DBNAME = os.environ.get("MYSQL_DBNAME", '-')
 MYSQL_HOST = os.environ.get("MYSQL_HOST", '127.0.0.1')
 MYSQL_USER = os.environ.get("MYSQL_USER", '-')
 MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", '-')
 MYSQL_PORT = os.environ.get("MYSQL_PORT", '3306')
-#==========数据库配置 结束=====================
+# ==========数据库配置 结束=====================
 
 LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", 'zh-hans')
-##LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", 'en')
+# #LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", 'en')
 
 # Application definition
 
@@ -64,7 +66,7 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
-    #'django.middleware.csrf.CsrfViewMiddleware',   # 取消post的验证。
+    # 'django.middleware.csrf.CsrfViewMiddleware',   # 取消post的验证。
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -102,19 +104,19 @@ DATABASES = {
         'NAME': BASE_DIR / 'db/db.sqlite3',
     }
 }
-if DATABASE_TYPE == 'MYSQL' and MYSQL_DBNAME!='-' and MYSQL_USER!= '-' and MYSQL_PASSWORD!='-':
+if DATABASE_TYPE == 'MYSQL' and MYSQL_DBNAME != '-' and MYSQL_USER != '-' and MYSQL_PASSWORD != '-':
     # 简单通过数据库名、账密信息过滤下，防止用户未配置mysql却使用mysql
     DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': MYSQL_DBNAME,               # 数据库名
-        'HOST': MYSQL_HOST,                 # 数据库服务器IP
-        'USER': MYSQL_USER,                 # 数据库用户名
-        'PASSWORD': MYSQL_PASSWORD,         # 数据库密码
-        'PORT': MYSQL_PORT,                 # 端口
-        'OPTIONS': {'charset': 'utf8'},
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': MYSQL_DBNAME,               # 数据库名
+            'HOST': MYSQL_HOST,                 # 数据库服务器IP
+            'USER': MYSQL_USER,                 # 数据库用户名
+            'PASSWORD': MYSQL_PASSWORD,         # 数据库密码
+            'PORT': MYSQL_PORT,                 # 端口
+            'OPTIONS': {'charset': 'utf8'},
+        }
     }
-}
 
 # Password validation
 # https://docs.djangoproject.com/en/3.1/ref/settings/#auth-password-validators
@@ -138,7 +140,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-#LANGUAGE_CODE = 'zh-hans'
+# LANGUAGE_CODE = 'zh-hans'
 
 TIME_ZONE = 'Asia/Shanghai'
 
@@ -146,7 +148,7 @@ USE_I18N = True
 
 USE_L10N = True
 
-#USE_TZ = True
+# USE_TZ = True
 USE_TZ = False
 
 
@@ -159,16 +161,14 @@ if DEBUG:
     STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 else:
-
-
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')     # 新增
 
 LANGUAGES = (
     ('zh-hans', '中文简体'),
     ('en', 'English'),
- 
+
 )
- 
+
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
