@@ -199,6 +199,11 @@ services:
 
 - [x] 支持mysql及sqlite3迁移mysql(1.4.8)。
 
+- [-] 用户前端修改密码。
+
+- [-] 前端改造，所有页面自适应，前后端分离(计划V2)。
+
+
 ## 其他相关工具
 
 - [可以修改客户端ID的CMD脚本](https://github.com/abdullah-erturk/RustDesk-ID-Changer)
