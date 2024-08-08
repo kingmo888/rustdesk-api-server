@@ -228,3 +228,8 @@ services:
 
 ## Stargazers over time
 [![Stargazers over time](https://starchart.cc/kingmo888/rustdesk-api-server.svg?variant=adaptive)](https://starchart.cc/kingmo888/rustdesk-api-server)
+
+
+## 联络我
+
+![wechat](images/wechat.png)
