@@ -2,6 +2,9 @@
 
 ## 请使用客户端最新版本1.2.3
 
+> 使用1.2.7客户端可以正常使用，遇到连接慢的问题但是1.1.11服务端无法设置空key的时候，随便设置一个key即可恢复正常.例如`-k "xxxx"`,不要使用自动生成的key！！！
+
+
 [The English explanation is available by clicking here.](https://github.com/kingmo888/rustdesk-api-server/blob/master/README_EN.md)
 
 <p align="center">
