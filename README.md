@@ -1,9 +1,5 @@
 # rustdesk-api-server
 
-## 请使用客户端最新版本1.2.3
-
-> 使用1.2.7客户端可以正常使用，遇到连接慢的问题但是1.1.11服务端无法设置空key的时候，随便设置一个key即可恢复正常.例如`-k "xxxx"`,不要使用自动生成的key！！！
-
 
 [The English explanation is available by clicking here.](https://github.com/kingmo888/rustdesk-api-server/blob/master/README_EN.md)
 
@@ -18,7 +14,22 @@
     <img src ="https://img.shields.io/badge/Docker-arm|arm64|amd64-blue.svg" />
 </p>
 
-![主页面](images/front_main.png) 
+# 1.2.3版本与1.2.6+版本区别
+> rustdesk官方在其新版服务端中已[强制要求key](https://rustdesk.com/docs/zh-cn/self-host/rustdesk-server-oss/install/#key)(rustdesk-server版本号大概>=1.1.10)
+
+- rustdesk版本<=1.2.3, 服务端请配合使用rustdesk-server<=1.1.10
+  - 根据自身需要来选择是否配置服务端的key参数。
+- rustdesk版本>1.2.3, 服务端请配合使用rustdesk-server>=1.1.11
+  - 当使用rustdesk-server自动生成的key时，会出现链接缓慢甚至链接超时。
+  - 解决办法：使用自定义k——配置rustdesk-server时，传入k参数来自定义key值，同时客户端同步配置相同的key，即可秒连。
+
+  - rustdesk-server的dock-compose配置参考：
+
+  ![demo](images/compose_demo.png)
+
+## 展示
+
+![主页面](images/front_main.png)
 
 ## 功能特点
 
@@ -172,7 +183,7 @@ services:
 - 后台操作登录或登出时：CSRF验证失败. 请求被中断.
 
   这种操作大概率是docker配置+nginx反代+SSL的组合，要注意修改CSRF_TRUSTED_ORIGINS，如果是ssl那就是https开头，否则就是http。
-  
+
 - Mysql版本要求
 
   如果你使用的是Mysql数据库，需要注意django4.x版本需要Mysql8.0，如果要使用mysql5.8则需要将django版本降至3.2。
@@ -187,7 +198,7 @@ services:
 - [x] 集成Web客户端形式（v1.4+）
 
   > 将大神的web客户端集成进来，已集成。 [来源](https://www.52pojie.cn/thread-1708319-1-1.html)
-  
+
 - [x] 对过期（不在线）设备的过滤，用以区分在线&离线设备(1.4.7)
 
   > 通过配置方式，对过期超过指定时间的设备清理或过滤。
