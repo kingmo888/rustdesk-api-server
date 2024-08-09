@@ -37,10 +37,14 @@
         <li class="layui-nav-item"><a href="/webui" target="_blank">{% trans "网页控制" %}</a></li>
 
         {% if u.is_admin %}
-        <li class="layui-nav-item"><a href="/api/conn_log">{% trans "连接日志" %}</a></li>
-        <li class="layui-nav-item"><a href="/api/file_log">{% trans "文件传输日志" %}</a></li>
-        <li class="layui-nav-item"><a href="/admin" target="_blank">{% trans "管理后台" %}</a>
+        <li class="layui-nav-item">
+            <a href="">{% trans "日志" %}</a>
+            <dl class="layui-nav-child">
+                <dd><a href="/api/conn_log">{% trans "连接日志" %}</a></dd>
+                <dd><a href="/api/file_log">{% trans "文件传输日志" %}</a></dd>
+            </dl>
         </li>
+        <li class="layui-nav-item"><a href="/admin" target="_blank">{% trans "管理后台" %}</a></li>
         {% endif %}
         <li class="layui-nav-item"><a href="/api/user_action?action=logout" target="_blank">{% trans "退出" %}</a></li>
     </ul>

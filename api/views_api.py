@@ -3,10 +3,10 @@ from django.http import JsonResponse
 import json
 import time
 import datetime
-import hashlib
+# import hashlib
 import math
 from django.contrib import auth
-from django.forms.models import model_to_dict
+# from django.forms.models import model_to_dict
 from api.models import RustDeskToken, UserProfile, RustDeskTag, RustDeskPeer, RustDesDevice, ConnLog, FileLog
 from django.db.models import Q
 import copy
@@ -21,7 +21,7 @@ def login(request):
         return JsonResponse(result)
 
     data = json.loads(request.body.decode())
-    
+
     username = data.get('username', '')
     password = data.get('password', '')
     rid = data.get('id', '')
@@ -29,19 +29,19 @@ def login(request):
     autoLogin = data.get('autoLogin', True)
     rtype = data.get('type', '')
     deviceInfo = data.get('deviceInfo', '')
-    user = auth.authenticate(username=username,password=password)
+    user = auth.authenticate(username=username, password=password)
     if not user:
         result['error'] = _('帐号或密码错误！请重试，多次重试后将被锁定IP！')
         return JsonResponse(result)
     user.rid = rid
     user.uuid = uuid
     user.autoLogin = autoLogin
-    user.rtype = rtype 
+    user.rtype = rtype
     user.deviceInfo = json.dumps(deviceInfo)
     user.save()
-    
+
     token = RustDeskToken.objects.filter(Q(uid=user.id) & Q(username=user.username) & Q(rid=user.rid)).first()
-    
+
     # 检查是否过期
     if token:
         now_t = datetime.datetime.now()
@@ -49,7 +49,7 @@ def login(request):
         if nums >= EFFECTIVE_SECONDS:
             token.delete()
             token = None
-    
+
     if not token:
         # 获取并保存token
         token = RustDeskToken(
@@ -57,33 +57,33 @@ def login(request):
             uid=user.id,
             uuid=user.uuid,
             rid=user.rid,
-            access_token=getStrMd5(str(time.time())+salt)
+            access_token=getStrMd5(str(time.time()) + salt)
         )
         token.save()
 
     result['access_token'] = token.access_token
     result['type'] = 'access_token'
-    result['user'] = {'name':user.username}
+    result['user'] = {'name': user.username}
     return JsonResponse(result)
 
 
 def logout(request):
     if request.method == 'GET':
-        result = {'error':_('请求方式错误！')}
+        result = {'error': _('请求方式错误！')}
         return JsonResponse(result)
-    
+
     data = json.loads(request.body.decode())
     rid = data.get('id', '')
     uuid = data.get('uuid', '')
     user = UserProfile.objects.filter(Q(rid=rid) & Q(uuid=uuid)).first()
     if not user:
-        result = {'error':_('异常请求！')}
+        result = {'error': _('异常请求！')}
         return JsonResponse(result)
     token = RustDeskToken.objects.filter(Q(uid=user.id) & Q(rid=user.rid)).first()
     if token:
         token.delete()
 
-    result = {'code':1}
+    result = {'code': 1}
     return JsonResponse(result)
 
 
@@ -92,17 +92,17 @@ def currentUser(request):
     if request.method == 'GET':
         result['error'] = _('错误的提交方式！')
         return JsonResponse(result)
-    postdata = json.loads(request.body)
-    rid = postdata.get('id', '')
-    uuid = postdata.get('uuid', '')
-    
+    # postdata = json.loads(request.body)
+    # rid = postdata.get('id', '')
+    # uuid = postdata.get('uuid', '')
+
     access_token = request.META.get('HTTP_AUTHORIZATION', '')
     access_token = access_token.split('Bearer ')[-1]
-    token = RustDeskToken.objects.filter(Q(access_token=access_token) ).first()
+    token = RustDeskToken.objects.filter(Q(access_token=access_token)).first()
     user = None
     if token:
         user = UserProfile.objects.filter(Q(id=token.uid)).first()
-    
+
     if user:
         if token:
             result['access_token'] = token.access_token
@@ -116,53 +116,53 @@ def ab(request):
     '''
     access_token = request.META.get('HTTP_AUTHORIZATION', '')
     access_token = access_token.split('Bearer ')[-1]
-    token = RustDeskToken.objects.filter(Q(access_token=access_token) ).first()
+    token = RustDeskToken.objects.filter(Q(access_token=access_token)).first()
     if not token:
-        result = {'error':_('拉取列表错误！')}
+        result = {'error': _('拉取列表错误！')}
         return JsonResponse(result)
-    
+
     if request.method == 'GET':
         result = {}
         uid = token.uid
-        tags = RustDeskTag.objects.filter(Q(uid=uid) )
+        tags = RustDeskTag.objects.filter(Q(uid=uid))
         tag_names = []
         tag_colors = {}
         if tags:
             tag_names = [str(x.tag_name) for x in tags]
-            tag_colors = {str(x.tag_name):int(x.tag_color) for x in tags if x.tag_color!=''}
-        
+            tag_colors = {str(x.tag_name): int(x.tag_color) for x in tags if x.tag_color != ''}
+
         peers_result = []
-        peers = RustDeskPeer.objects.filter(Q(uid=uid) )
+        peers = RustDeskPeer.objects.filter(Q(uid=uid))
         if peers:
             for peer in peers:
                 tmp = {
-                    'id':peer.rid,
-                    'username':peer.username,
-                    'hostname':peer.hostname,
-                    'alias':peer.alias,
-                    'platform':peer.platform,
-                    'tags':peer.tags.split(','),
-                    'hash':peer.rhash,
+                    'id': peer.rid,
+                    'username': peer.username,
+                    'hostname': peer.hostname,
+                    'alias': peer.alias,
+                    'platform': peer.platform,
+                    'tags': peer.tags.split(','),
+                    'hash': peer.rhash,
                 }
                 peers_result.append(tmp)
-        
+
         result['updated_at'] = datetime.datetime.now()
         result['data'] = {
-            'tags':tag_names,
-            'peers':peers_result,
-            'tag_colors':json.dumps(tag_colors)
+            'tags': tag_names,
+            'peers': peers_result,
+            'tag_colors': json.dumps(tag_colors)
         }
         result['data'] = json.dumps(result['data'])
         return JsonResponse(result)
     else:
         postdata = json.loads(request.body.decode())
         data = postdata.get('data', '')
-        data = {} if data=='' else json.loads(data)
+        data = {} if data == '' else json.loads(data)
         tagnames = data.get('tags', [])
         tag_colors = data.get('tag_colors', '')
-        tag_colors = {} if tag_colors=='' else json.loads(tag_colors)
+        tag_colors = {} if tag_colors == '' else json.loads(tag_colors)
         peers = data.get('peers', [])
-        
+
         if tagnames:
             # 删除旧的tag
             RustDeskTag.objects.filter(uid=token.uid).delete()
@@ -189,22 +189,24 @@ def ab(request):
                     platform=one['platform'],
                     tags=','.join(one['tags']),
                     rhash=one['hash'],
-                    
-                    
+
+
                 )
                 newlist.append(peer)
             RustDeskPeer.objects.bulk_create(newlist)
 
     result = {
-    'code':102,
-    'data':_('更新地址簿有误')
+        'code': 102,
+        'data': _('更新地址簿有误')
     }
     return JsonResponse(result)
+
 
 def ab_get(request):
     # 兼容 x86-sciter 版客户端，此版客户端通过访问 "POST /api/ab/get" 来获取地址簿
     request.method = 'GET'
     return ab(request)
+
 
 def sysinfo(request):
     # 客户端注册服务后，才会发送设备信息
@@ -212,9 +214,9 @@ def sysinfo(request):
     if request.method == 'GET':
         result['error'] = _('错误的提交方式！')
         return JsonResponse(result)
-    
+
     postdata = json.loads(request.body)
-    device = RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid']) ).first()
+    device = RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid'])).first()
     if not device:
         device = RustDesDevice(
             rid=postdata['id'],
@@ -231,25 +233,27 @@ def sysinfo(request):
         postdata2 = copy.copy(postdata)
         postdata2['rid'] = postdata2['id']
         postdata2.pop('id')
-        RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid']) ).update(**postdata2)
+        RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid'])).update(**postdata2)
     result['data'] = 'ok'
     return JsonResponse(result)
 
+
 def heartbeat(request):
     postdata = json.loads(request.body)
-    device = RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid']) ).first()
+    device = RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid'])).first()
     if device:
         device.save()
     # token保活
     create_time = datetime.datetime.now() + datetime.timedelta(seconds=EFFECTIVE_SECONDS)
-    RustDeskToken.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid']) ).update(create_time=create_time)
+    RustDeskToken.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid'])).update(create_time=create_time)
     result = {}
     result['data'] = _('在线')
     return JsonResponse(result)
 
+
 def audit(request):
     postdata = json.loads(request.body)
-    #print(postdata)
+    # print(postdata)
     audit_type = postdata['action'] if 'action' in postdata else ''
     if audit_type == 'new':
         new_conn_log = ConnLog(
@@ -263,7 +267,7 @@ def audit(request):
             uuid=postdata['uuid'] if 'uuid' in postdata else '',
         )
         new_conn_log.save()
-    elif audit_type =="close":
+    elif audit_type == "close":
         ConnLog.objects.filter(Q(conn_id=postdata['conn_id'])).update(conn_end=datetime.datetime.now())
     elif 'is_file' in postdata:
         print(postdata)
@@ -284,14 +288,15 @@ def audit(request):
             peer = postdata['peer']
             ConnLog.objects.filter(Q(conn_id=postdata['conn_id'])).update(session_id=postdata['session_id'])
             ConnLog.objects.filter(Q(conn_id=postdata['conn_id'])).update(from_id=peer[0])
-        except:
-            print(postdata)
+        except Exception as e:
+            print(postdata, e)
 
     result = {
-    'code':1,
-    'data':'ok'
+        'code': 1,
+        'data': 'ok'
     }
     return JsonResponse(result)
+
 
 def convert_filesize(size_bytes):
     if size_bytes == 0:
@@ -301,17 +306,19 @@ def convert_filesize(size_bytes):
     p = math.pow(1024, i)
     s = round(size_bytes / p, 2)
     return "%s %s" % (s, size_name[i])
-    
+
+
 def users(request):
     result = {
-    'code':1,
-    'data':_('好的')
+        'code': 1,
+        'data': _('好的')
     }
     return JsonResponse(result)
-    
+
+
 def peers(request):
     result = {
-    'code':1,
-    'data':'ok'
+        'code': 1,
+        'data': 'ok'
     }
     return JsonResponse(result)
