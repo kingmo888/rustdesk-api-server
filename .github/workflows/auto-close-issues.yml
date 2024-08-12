@@ -12,19 +12,22 @@ jobs:
       id: check_star
       run: |
         ISSUE_USER=$(jq -r '.issue.user.login' < $GITHUB_EVENT_PATH)
+        echo "Issue created by user: $ISSUE_USER"
         STARRED=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
                  "https://api.github.com/user/starred/${{ github.repository }}" | \
                  jq -r '.[].login' | grep -c "^$ISSUE_USER$" || true)
-        echo "::set-output name=starred::$STARRED"
+        echo "User starred: $STARRED"
+        echo "starred=$STARRED" >> $GITHUB_ENV
 
     - name: Close issue if not starred
-      if: steps.check_star.outputs.starred == '0'
+      if: env.starred == '0'
       run: |
         ISSUE_NUMBER=$(jq -r '.issue.number' < $GITHUB_EVENT_PATH)
+        echo "Closing issue #$ISSUE_NUMBER"
         curl -s -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         -H "Accept: application/vnd.github.v3+json" \
         https://api.github.com/repos/${{ github.repository }}/issues/$ISSUE_NUMBER/comments \
-        -d '{"body":"白嫖随便拿，但不接受无star的提问。本提问将自动关闭。Please star the project before submitting an issue."}'
+        -d '{"body":"Please star the project before submitting an issue."}'
 
         curl -s -X PATCH -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
         -H "Accept: application/vnd.github.v3+json" \
