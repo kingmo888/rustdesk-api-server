@@ -19,6 +19,7 @@ jobs:
         while [[ -z "$STARRED" ]]; do
           STARRED_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
               "https://api.github.com/repos/${{ github.repository }}/stargazers?per_page=100&page=$PAGE")
+          echo "STARRED_RESPONSE=$STARRED_RESPONSE"  # 输出 API 返回的数据以检查结构
 
           if [[ -z "$STARRED_RESPONSE" || "$STARRED_RESPONSE" == "[]" ]]; then
             break
@@ -35,6 +36,7 @@ jobs:
         fi
 
         echo "starred=$STARRED" >> $GITHUB_ENV
+
 
 
 
