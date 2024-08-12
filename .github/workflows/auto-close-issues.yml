@@ -13,12 +13,29 @@ jobs:
       run: |
         ISSUE_USER=$(jq -r '.issue.user.login' < $GITHUB_EVENT_PATH)
         echo "Issue created by user: $ISSUE_USER"
-        STARRED_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
-            "https://api.github.com/repos/${{ github.repository }}/stargazers")
-        echo "STARRED_RESPONSE=$STARRED_RESPONSE"
+        PAGE=1
+        STARRED=""
         
-        STARRED=$(echo "$STARRED_RESPONSE" | jq -r '.[] | select(.login == "'$ISSUE_USER'") | .login')
+        while [[ -z "$STARRED" ]]; do
+          STARRED_RESPONSE=$(curl -s -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+              "https://api.github.com/repos/${{ github.repository }}/stargazers?per_page=100&page=$PAGE")
+
+          if [[ -z "$STARRED_RESPONSE" || "$STARRED_RESPONSE" == "[]" ]]; then
+            break
+          fi
+
+          STARRED=$(echo "$STARRED_RESPONSE" | jq -r '.[] | select(.login == "'$ISSUE_USER'") | .login')
+          PAGE=$((PAGE + 1))
+        done
+
+        if [[ -z "$STARRED" ]]; then
+          echo "User has not starred the repo."
+        else
+          echo "User has starred the repo."
+        fi
+
         echo "starred=$STARRED" >> $GITHUB_ENV
+
 
 
     - name: Close issue if not starred
