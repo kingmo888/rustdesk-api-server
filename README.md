@@ -30,6 +30,9 @@
 `key是保证别人不能在知道你中继服务器的IP后，利用你的IP做中继。如果不配置key，就做好中继IP的保密工作，不要泄露给其他人。
 而只要服务端配置了密钥，无论是随机生成（生成后本身就固定了），还是自定义的，如果控制客户端不配置对应key就无法控制其他机器（被控机器可以不填key）`
 
+对于自定义key是否生效，请看rustdesk server中`hbbs`的日志：
+![demo](images/key_activate.png)
+
 ## 展示
 
 ![主页面](images/front_main.png)
