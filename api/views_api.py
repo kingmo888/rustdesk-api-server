@@ -40,6 +40,8 @@ def update_device_owner(rid: str, uuid: str, owner: str = None, add: bool = Fals
         owner: The owner to be set. If add is False, owner will be set to None.
         add: If True, add owner; if False, remove owner by setting it to None.
     """
+    if rid == '' and uuid == '':
+        return None
     # If add is False, set owner to None, indicating the owner will be removed
     if not add:
         owner = ""
@@ -110,7 +112,6 @@ def login(request):
     if request.method == 'GET':
         result['error'] = _('请求方式错误！请使用POST方式。')
         return JsonResponse(result)
-
     data = json.loads(request.body.decode())
     username = data.get('username', '')
     password = data.get('password', '')
@@ -129,7 +130,7 @@ def login(request):
     user.rtype = rtype
     user.deviceInfo = json.dumps(deviceInfo)
     user.save()
-    update_device_owner(rid=rid, uuid=uuid, owner=username, add=True, **deviceInfo)
+    update_device_owner(rid=rid, uuid=uuid, owner=username, add=True)
     update_self_tag(username=username)
     token = RustDeskToken.objects.filter(Q(uid=user.id) & Q(username=user.username) & Q(rid=user.rid)).first()
 
