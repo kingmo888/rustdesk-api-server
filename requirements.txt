@@ -1,3 +1,4 @@
 django
 xlwt
 mysqlclient
+django-environ

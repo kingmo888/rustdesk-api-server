@@ -12,42 +12,61 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 import os
 from pathlib import Path
 
+import environ
+env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
-if "CSRF_TRUSTED_ORIGINS" in os.environ:
-    CSRF_TRUSTED_ORIGINS = [os.environ["CSRF_TRUSTED_ORIGINS"]]
+
+# Set a default environment file path: project/.env
+ENV_PATH_DEFAULT = BASE_DIR.joinpath(".env")
+# try to read the environment file path from the ENV_PATH environment variable, if not found, use the default path
+ENV_PATH = env.str("ENV_PATH", default=ENV_PATH_DEFAULT.as_posix())
+# read the environment variables from the file
+environ.Env.read_env(ENV_PATH)
+
+# read RUSTSERK_API_URL from environment variable
+RUSTSERK_API_URL = env.str("RUSTSERK_API_URL", default="http://127.0.0.1:21114")
+
+if env("CSRF_TRUSTED_ORIGINS", default="") != "":
+    # Set the CSRF_TRUSTED_ORIGINS environment variable to a list of trusted origins to allow POST requests from them without a CSRF token.
+    CSRF_TRUSTED_ORIGINS = env.list("CSRF_TRUSTED_ORIGINS", default=[RUSTSERK_API_URL])
 else:
-    CSRF_TRUSTED_ORIGINS = ["http://127.0.0.1:21114"]
+    CSRF_TRUSTED_ORIGINS = [RUSTSERK_API_URL]
     SECURE_CROSS_ORIGIN_OPENER_POLICY = 'None'
+
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("SECRET_KEY", 'j%7yjvygpih=6b%qf!q%&ixpn+27dngzdu-i3xh-^3xgy3^nnc')
+SECRET_KEY = env.str("SECRET_KEY", default="j%7yjvygpih=6b%qf!q%&ixpn+27dngzdu-i3xh-^3xgy3^nnc")
 # ID服务器IP或域名，一般与中继服务器，用于web client
-ID_SERVER = os.environ.get("ID_SERVER", '')
+ID_SERVER = env.str("ID_SERVER", default="")
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = os.environ.get("DEBUG", False)
+DEBUG = env.bool("DEBUG", default=False)
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
-ALLOWED_HOSTS = ["*"]
+
+# If it's debug mode, allow all hosts
+# If the ALLOWED_HOSTS environment variable is not set, allow all hosts
+ALLOWED_HOSTS = ["*"] if DEBUG else env.list("ALLOWED_HOSTS", default=["*"])
+
 AUTH_USER_MODEL = 'api.UserProfile'      # AppName.自定义user
 
-ALLOW_REGISTRATION = os.environ.get("ALLOW_REGISTRATION", "True")          # 是否允许注册, True为允许，False为不允许
-ALLOW_REGISTRATION = True if ALLOW_REGISTRATION.lower() == 'true' else False
-
+# If allow registration is set to False, the registration page will not be accessible. default is True
+ALLOW_REGISTRATION = env.bool("ALLOW_REGISTRATION", default=True)
 
 # ==========数据库配置 开始=====================
-DATABASE_TYPE = os.environ.get("DATABASE_TYPE", 'SQLITE')
-MYSQL_DBNAME = os.environ.get("MYSQL_DBNAME", '-')
-MYSQL_HOST = os.environ.get("MYSQL_HOST", '127.0.0.1')
-MYSQL_USER = os.environ.get("MYSQL_USER", '-')
-MYSQL_PASSWORD = os.environ.get("MYSQL_PASSWORD", '-')
-MYSQL_PORT = os.environ.get("MYSQL_PORT", '3306')
+
+DATABASE_TYPE = env.str("DATABASE_TYPE", default="SQLITE")
+MYSQL_DBNAME = env.str("MYSQL_DBNAME", default="-")
+MYSQL_HOST = env.str("MYSQL_HOST", default="127.0.0.1")
+MYSQL_USER = env.str("MYSQL_USER", default="-")
+MYSQL_PASSWORD = env.str("MYSQL_PASSWORD", default="-")
+MYSQL_PORT = env.int("MYSQL_PORT", default="3306")
+
 # ==========数据库配置 结束=====================
 
-LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", 'zh-hans')
-# #LANGUAGE_CODE = os.environ.get("LANGUAGE_CODE", 'en')
-
+LANGUAGE_CODE = env.str("LANGUAGE_CODE", default="zh-hans")
+# LANGUAGE_CODE=env.str("LANGUAGE_CODE", default="en")
 # Application definition
 
 INSTALLED_APPS = [
@@ -142,7 +161,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 # LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'Asia/Shanghai'
+TIME_ZONE = env.str("TIME_ZONE", default="Asia/Shanghai")
 
 USE_I18N = True
 
