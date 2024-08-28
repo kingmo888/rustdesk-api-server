@@ -172,3 +172,7 @@ LANGUAGES = (
 LOCALE_PATHS = (
     os.path.join(BASE_DIR, 'locale'),
 )
+
+
+SELF_TAG_NAME='self'
+SELF_TAG_COLOR=0xFF6A1B9A
