@@ -50,6 +50,22 @@ def update_device_owner(rid: str, uuid: str, owner: str = None, add: bool = Fals
     return device
 
 
+def _tag_list_to_str(tag_list: list[str]) -> str:
+    """
+    Convert a list of tags to a string.
+    """
+    tag_list = [x for x in tag_list if x != '']
+    return ",".join(tag_list)
+
+
+def _tag_str_to_list(tag_str: str) -> list[str]:
+    """
+    Convert a string of tags to a list.
+    """
+    tag_list = tag_str.split(',')
+    return [x for x in tag_list if x != '']
+
+
 def update_self_tag(username: str) -> RustDeskTag:
     """
     Update self tag.
@@ -78,10 +94,10 @@ def update_self_devices_to_peers(username: str) -> None:
         peer.username = device.username
         peer.hostname = device.hostname
         peer.platform = device.os
-        tags = peer.tags.split(',')
+        tags = _tag_str_to_list(peer.tags)
         if self_tag.tag_name not in tags:
             tags.append(self_tag.tag_name)
-        peer.tags = ",".join(tags)
+        peer.tags = _tag_list_to_str(tags)
         peer.save()
 
 
@@ -95,14 +111,13 @@ def delete_self_devices_from_peers(username: str) -> None:
     peers = RustDeskPeer.get_peers_by_uid(uid=uid)
     for peer in peers:
         peer: RustDeskPeer = peer
-        tags = peer.tags.split(',')
+        tags = _tag_str_to_list(peer.tags)
         if settings.SELF_TAG_NAME in tags:
-            l = len(tags)
-            if l == 1 or l == 2:
+            if len(tags) == 1:
                 peer.delete()
             else:
                 tags.remove(settings.SELF_TAG_NAME)
-                peer.tags = ",".join(tags)
+                peer.tags = _tag_list_to_str(tags)
                 peer.rhash = ""
                 peer.save()
 
@@ -229,13 +244,14 @@ def ab(request):
         peers = RustDeskPeer.objects.filter(Q(uid=uid))
         if peers:
             for peer in peers:
+                tags = _tag_str_to_list(peer.tags)
                 tmp = {
                     'id': peer.rid,
                     'username': peer.username,
                     'hostname': peer.hostname,
                     'alias': peer.alias,
                     'platform': peer.platform,
-                    'tags': peer.tags.split(','),
+                    'tags': tags,
                     'hash': peer.rhash,
                 }
                 peers_result.append(tmp)
@@ -277,6 +293,7 @@ def ab(request):
                 tags = one['tags']
                 if settings.SELF_TAG_NAME in tags:
                     tags.remove(settings.SELF_TAG_NAME)
+                tags_str = _tag_list_to_str(tags)
                 peer = RustDeskPeer(
                     uid=token.uid,
                     rid=one['id'],
@@ -284,7 +301,7 @@ def ab(request):
                     hostname=one['hostname'],
                     alias=one['alias'],
                     platform=one['platform'],
-                    tags=','.join(tags),
+                    tags=tags_str,
                     rhash=one['hash'],
                 )
                 newlist.append(peer)
