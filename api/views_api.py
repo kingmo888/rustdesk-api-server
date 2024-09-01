@@ -39,6 +39,18 @@ def login(request):
     user.rtype = rtype
     user.deviceInfo = json.dumps(deviceInfo)
     user.save()
+    # 绑定设备  20240819
+    peer = RustDeskPeer.objects.filter(Q(rid=rid)).first()
+    if not peer:
+        device = RustDesDevice.objects.filter(Q(uuid=uuid)).first()
+        if device:
+            peer = RustDeskPeer()
+            peer.uid = user.id
+            peer.rid = device.rid
+            peer.abid = ab.guid
+            peer.hostname = device.hostname
+            peer.username = device.username
+            peer.save()
 
     token = RustDeskToken.objects.filter(Q(uid=user.id) & Q(username=user.username) & Q(rid=user.rid)).first()
 
