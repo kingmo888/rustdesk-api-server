@@ -47,7 +47,7 @@ def login(request):
             peer = RustDeskPeer()
             peer.uid = user.id
             peer.rid = device.rid
-            peer.abid = ab.guid
+            # peer.abid = ab.guid    # v2,  current version not used
             peer.hostname = device.hostname
             peer.username = device.username
             peer.save()
