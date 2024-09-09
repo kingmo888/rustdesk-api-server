@@ -226,7 +226,7 @@ def sysinfo(request):
     if request.method == 'GET':
         result['error'] = _('错误的提交方式！')
         return JsonResponse(result)
-
+    client_ip = request.META.get('REMOTE_ADDR')
     postdata = json.loads(request.body)
     device = RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid'])).first()
     if not device:
@@ -239,6 +239,7 @@ def sysinfo(request):
             username=postdata.get('username', '-'),
             uuid=postdata['uuid'],
             version=postdata['version'],
+            ip_address=client_ip
         )
         device.save()
     else:
@@ -254,6 +255,8 @@ def heartbeat(request):
     postdata = json.loads(request.body)
     device = RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid'])).first()
     if device:
+        client_ip = request.META.get('REMOTE_ADDR')
+        device.ip_address = client_ip
         device.save()
     # token保活
     create_time = datetime.datetime.now() + datetime.timedelta(seconds=EFFECTIVE_SECONDS)

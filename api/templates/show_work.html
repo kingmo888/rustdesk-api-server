@@ -23,6 +23,7 @@
                 <th>{{ "系统" | translate }}</th>
                 <th>{{ "CPU" | translate }}</th>
                 <th>{{ "内存" | translate }}</th>
+                <th>{{ "IP" | translate }}</th>
                 <th>{{ "注册时间" | translate }}</th>
                 <th>{{ "更新时间" | translate }}</th>
                 <th>{{ "状态" | translate }}</th>
@@ -41,6 +42,7 @@
                 <td>{{one.os}}</td>
                 <td>{{one.cpu}}</td>
                 <td>{{one.memory}}</td>
+                <td>{{one.ip_address}}</td>
                 <td>{{one.create_time}}</td>
                 <td>{{one.update_time}}</td>
                 <td>{{one.status}} </td>
@@ -67,10 +69,10 @@
               <button class="layui-btn" ><a href="?page={{ page_obj.paginator.num_pages }}">{{ "尾页" | translate }} &raquo;</a></button>
           {% endif %}
       </span>
-  </div>  
+  </div>
     {% endif %}
 
-    
+
     {% if u.is_admin and show_all %}
     <div class="layui-col-md15">
       <div class="layui-card">
@@ -89,6 +91,7 @@
                 <th>{{ "系统" | translate }}</th>
                 <th>{{ "CPU" | translate }}</th>
                 <th>{{ "内存" | translate }}</th>
+                <th>{{ "IP" | translate }}</th>
                 <th>{{ "注册日期" | translate }}</th>
                 <th>{{ "更新时间" | translate }}</th>
                 <th>{{ "状态" | translate }}</th>
@@ -106,6 +109,7 @@
                 <td>{{one.os}} </td>
                 <td>{{one.cpu}} </td>
                 <td>{{one.memory}} </td>
+                <td>{{one.ip_address}}</td>
                 <td>{{one.create_time}} </td>
                 <td>{{one.update_time}} </td>
                 <td>{{one.status}} </td>
@@ -132,11 +136,11 @@
               <button class="layui-btn" ><a href="?show_type=admin&page={{ page_obj.paginator.num_pages }}">{{ "尾页" | translate }} &raquo;</a></button>
           {% endif %}
       </span>
-  </div>  
+  </div>
     {% endif %}
 
- 
-  
+
+
 
   </div>
 </div>
