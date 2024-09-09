@@ -229,6 +229,9 @@ def get_all_info():
         if device:
             devices[peer.rid]['rust_user'] = user.username
 
+    for rid in devices.keys():
+        if not devices[rid].get('rust_user', ''):
+            devices[rid]['rust_user'] = _('未登录')
     for k, v in devices.items():
         devices[k]['status'] = _('在线') if (now - datetime.datetime.strptime(v['update_time'], '%Y-%m-%d %H:%M')).seconds <= 120 else _('离线')
     return [v for k, v in devices.items()]
