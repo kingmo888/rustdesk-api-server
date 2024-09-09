@@ -14,6 +14,15 @@ from .views_front import *
 from django.utils.translation import gettext as _
 
 
+def get_client_ip(request):
+    x_forwarded_for = request.META.get('HTTP_X_FORWARDED_FOR')
+    if x_forwarded_for:
+        ip = x_forwarded_for.split(',')[0]
+    else:
+        ip = request.META.get('REMOTE_ADDR')
+    return ip
+
+
 def login(request):
     result = {}
     if request.method == 'GET':
@@ -226,7 +235,7 @@ def sysinfo(request):
     if request.method == 'GET':
         result['error'] = _('错误的提交方式！')
         return JsonResponse(result)
-    client_ip = request.META.get('REMOTE_ADDR')
+    client_ip = get_client_ip(request)
     postdata = json.loads(request.body)
     device = RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid'])).first()
     if not device:
@@ -255,7 +264,7 @@ def heartbeat(request):
     postdata = json.loads(request.body)
     device = RustDesDevice.objects.filter(Q(rid=postdata['id']) & Q(uuid=postdata['uuid'])).first()
     if device:
-        client_ip = request.META.get('REMOTE_ADDR')
+        client_ip = get_client_ip(request)
         device.ip_address = client_ip
         device.save()
     # token保活
