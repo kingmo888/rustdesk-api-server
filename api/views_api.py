@@ -42,6 +42,10 @@ def login(request):
     if not user:
         result['error'] = _('帐号或密码错误！请重试，多次重试后将被锁定IP！')
         return JsonResponse(result)
+    # 加入过期时间判断
+    if user.expire_at and user.expire_at < datetime.datetime.now(datetime.timezone.utc):
+        result['error'] = _('账号已过期，请联系管理员续费。')
+        return JsonResponse(result)
     user.rid = rid
     user.uuid = uuid
     user.autoLogin = autoLogin
