@@ -129,6 +129,7 @@ def currentUser(request):
             result['access_token'] = token.access_token
         result['type'] = 'access_token'
         result['name'] = user.username
+        result['verifier'] = ''
     return JsonResponse(result)
 
 
